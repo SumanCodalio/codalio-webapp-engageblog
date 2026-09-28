@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Map test results to acceptance criteria and update JSON incrementally",
+    "notes": "84/84 tested; .rhino-review.md written",
+    "status": "done"
+  },
+  {
+    "title": "Write .rhino-review.md report",
+    "notes": "234-line report at .rhino-review.md",
+    "status": "done"
+  }
+]

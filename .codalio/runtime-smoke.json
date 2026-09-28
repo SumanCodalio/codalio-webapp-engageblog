@@ -1,0 +1,79 @@
+{
+  "backend_stack": "rhino-rails",
+  "checks": [
+    "readiness:frontend",
+    "readiness:backend:/up",
+    "frontend:load",
+    "authentication:admin_login",
+    "authentication:unauthenticated_denial",
+    "tenant:organization_selection",
+    "tenant:scoped_route",
+    "crud:list",
+    "crud:read",
+    "validation:invalid_payload_rejected",
+    "authorization:limited_role_read",
+    "authorization:limited_role_denial",
+    "crud:create",
+    "crud:update",
+    "tenant:second_tenant_login",
+    "tenant:second_tenant_denial",
+    "crud:delete"
+  ],
+  "client_stack": "rhino-react",
+  "command": [
+    "host-http-runtime-smoke"
+  ],
+  "executed_at": "2026-09-28T22:21:29.340410+00:00",
+  "executed_checks": [
+    "readiness:frontend",
+    "readiness:backend:/up",
+    "frontend:load",
+    "authentication:admin_login",
+    "authentication:unauthenticated_denial",
+    "tenant:organization_selection",
+    "tenant:scoped_route",
+    "crud:list",
+    "crud:read",
+    "validation:invalid_payload_rejected",
+    "authorization:limited_role_read",
+    "authorization:limited_role_denial",
+    "crud:create",
+    "crud:update",
+    "tenant:second_tenant_login",
+    "tenant:second_tenant_denial",
+    "crud:delete"
+  ],
+  "execution_id": "99667294-242e-40e4-999d-a9b875b938ac",
+  "failures": [],
+  "flow": [
+    "listed seeded AnalyticsData",
+    "created AnalyticsData",
+    "updated AnalyticsData",
+    "deleted AnalyticsData"
+  ],
+  "gate": "runtime",
+  "health_path": "/up",
+  "result": {
+    "checks": 17,
+    "failures": 0,
+    "returncode": 0
+  },
+  "rhino_runtime": "v4",
+  "routes": [
+    "/",
+    "/login",
+    "/create-post",
+    "/media-library",
+    "/analytics",
+    "/admin",
+    "/admin/users",
+    "/admin/api-integrations",
+    "/admin/system-settings",
+    "/admin/system-reports"
+  ],
+  "schema": "codalio.generation-evidence",
+  "source_files": 271,
+  "source_sha256": "2f0dfc64ab60e408e1efe39d76a539ebf69e191b693a908051207609d9d1a6b4",
+  "status": "passed",
+  "version": 1
+}

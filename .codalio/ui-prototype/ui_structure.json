@@ -1,0 +1,1978 @@
+{
+  "pages": [
+    {
+      "name": "Landing",
+      "route": "/",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Overview Hero",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "hero",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "DashboardHero",
+              "props": {
+                "title": "Welcome back, Sarah",
+                "subtitle": "Track reach, publish high-impact video blogs, and accelerate audience growth."
+              },
+              "images": null,
+              "styling": {
+                "container": "bg-gradient-to-r from-primary/10 via-card to-card border border-border p-6 rounded-xl shadow-sm"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "analytics_data",
+              "event_handlers": [
+                "onQuickPublish",
+                "onDateRangeChange"
+              ],
+              "image_keywords": [
+                "dashboard",
+                "analytics"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Button",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Key Metrics",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PerformanceMetricsGrid",
+              "props": {
+                "metrics": [
+                  {
+                    "label": "Total Content Reach",
+                    "trend": "up",
+                    "value": "142.8K",
+                    "change": "+18.4%"
+                  },
+                  {
+                    "label": "Video Watch Hours",
+                    "trend": "up",
+                    "value": "3,820 hrs",
+                    "change": "+32.1%"
+                  },
+                  {
+                    "label": "Avg. Read Completion",
+                    "trend": "up",
+                    "value": "68.5%",
+                    "change": "+4.2%"
+                  },
+                  {
+                    "label": "Published Stories",
+                    "trend": "neutral",
+                    "value": "24",
+                    "change": "+3 this week"
+                  }
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "analytics_data",
+              "event_handlers": [
+                "onMetricFilterChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Recent Content & Video Posts",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "RecentPostsSection",
+              "props": {
+                "defaultFilter": "all",
+                "allowBatchActions": true
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border shadow-sm p-6"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "posts",
+              "event_handlers": [
+                "onFilterChange",
+                "onSelectPost",
+                "onEditPost",
+                "onDeletePost"
+              ],
+              "image_keywords": [
+                "blog",
+                "technology"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Button",
+                "Badge",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Tabs",
+                "TabsList",
+                "TabsTrigger",
+                "Input",
+                "DropdownMenu",
+                "DropdownMenuTrigger",
+                "DropdownMenuContent",
+                "DropdownMenuItem"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Video Performance Spotlight",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "features",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "VideoSpotlightWidget",
+              "props": {
+                "featuredVideoTitle": "Q3 Product Keynote & Developer Walkthrough"
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 lg:grid-cols-3 gap-6"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "videos",
+              "event_handlers": [
+                "onPlayVideo",
+                "onInspectPerformance"
+              ],
+              "image_keywords": [
+                "video",
+                "multimedia"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Button",
+                "Progress",
+                "Badge"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Content Reach Dashboard",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Login",
+      "route": "/login",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Authentication",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "LoginForm",
+              "props": {
+                "defaultEmail": "sarah.chen@contentreach.io",
+                "rolesAvailable": [
+                  "Content Manager",
+                  "Admin"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "max-w-md mx-auto my-12 bg-card border border-border shadow-lg rounded-2xl p-6 sm:p-8"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "users",
+              "event_handlers": [
+                "onSubmit",
+                "onSelectDemoPersona",
+                "onTogglePasswordVisibility"
+              ],
+              "image_keywords": [
+                "workspace",
+                "office"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "CardFooter",
+                "Input",
+                "Label",
+                "Button",
+                "Badge",
+                "Checkbox",
+                "Alert",
+                "AlertDescription"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Sign In",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "CreatePost",
+      "route": "/create-post",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Post Actions Bar",
+          "images": null,
+          "spacing": "tight",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PostHeaderBar",
+              "props": {
+                "lastSaved": "Just now",
+                "currentStatus": "Draft"
+              },
+              "images": null,
+              "styling": {
+                "container": "flex items-center justify-between pb-6 border-b border-border"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onSaveDraft",
+                "onPublishPost",
+                "onPreviewToggle"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Badge",
+                "DropdownMenu",
+                "DropdownMenuTrigger",
+                "DropdownMenuContent",
+                "DropdownMenuItem",
+                "Tooltip"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Post Composer & Video Integration",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PostEditorForm",
+              "props": {
+                "categories": [
+                  "Engineering",
+                  "Product Updates",
+                  "Video Tutorials",
+                  "Industry Insights",
+                  "Case Studies"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full flex-1 space-y-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "posts",
+              "event_handlers": [
+                "onTitleChange",
+                "onSlugChange",
+                "onCategoryChange",
+                "onTagAdd",
+                "onBodyChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "CardHeader",
+                "CardTitle",
+                "Input",
+                "Textarea",
+                "Label",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Tabs",
+                "TabsList",
+                "TabsTrigger",
+                "TabsContent",
+                "Badge"
+              ]
+            },
+            {
+              "name": "VideoEmbedManager",
+              "props": {
+                "maxFileSize": "500MB",
+                "acceptedFormats": [
+                  ".mp4",
+                  ".mov",
+                  ".webm"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full rounded-xl border border-dashed border-primary/40 bg-accent/30 p-6"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "videos",
+              "event_handlers": [
+                "onUploadVideo",
+                "onSelectMediaAsset",
+                "onEmbedVideoUrl"
+              ],
+              "image_keywords": [
+                "video",
+                "recording"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Button",
+                "Input",
+                "Progress",
+                "Alert",
+                "AlertDescription",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "SEO & Distribution Settings",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "PublishingSettingsDrawer",
+              "props": {
+                "author": "Sarah Chen",
+                "defaultVisibility": "Public"
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onToggleSchedule",
+                "onSeoMetaChange",
+                "onSocialShareSettingsChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Switch",
+                "Label",
+                "Input",
+                "Button",
+                "Calendar",
+                "Popover",
+                "PopoverTrigger",
+                "PopoverContent"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Create & Publish Post",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "MediaLibrary",
+      "route": "/media-library",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Media Library Header",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MediaHeaderActions",
+              "props": {
+                "mediaTypes": [
+                  "All Media",
+                  "Videos",
+                  "Images",
+                  "Audio",
+                  "Thumbnails"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onUploadDrop",
+                "onOpenUploadModal",
+                "onSearchMedia",
+                "onFilterMediaType"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Input",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Assets & Asset Inspector",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "MediaGrid",
+              "props": {
+                "viewMode": "grid"
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "videos",
+              "event_handlers": [
+                "onSelectMedia",
+                "onDeleteMedia",
+                "onCopyAssetUrl",
+                "onPreviewVideo"
+              ],
+              "image_keywords": [
+                "media",
+                "video"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardContent",
+                "CardFooter",
+                "Badge",
+                "Button",
+                "DropdownMenu",
+                "DropdownMenuTrigger",
+                "DropdownMenuContent",
+                "DropdownMenuItem",
+                "Dialog",
+                "DialogContent",
+                "DialogHeader",
+                "DialogTitle",
+                "DialogTrigger"
+              ]
+            },
+            {
+              "name": "MediaDetailsSidebar",
+              "props": {
+                "storageUsed": "14.2 GB",
+                "totalStorage": "50.0 GB"
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full lg:w-80 shrink-0 space-y-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "videos",
+              "event_handlers": [
+                "onUpdateMediaDetails",
+                "onDownloadAsset"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Progress",
+                "Button",
+                "Input",
+                "Label",
+                "Badge",
+                "Separator"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Media Library",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Analytics",
+      "route": "/analytics",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Date & Scope Filters",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "AnalyticsFilterBar",
+              "props": {
+                "availableRanges": [
+                  "Last 7 Days",
+                  "Last 30 Days",
+                  "Last 90 Days",
+                  "Year to Date"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "flex flex-wrap items-center justify-between gap-4 p-4 bg-card rounded-xl border border-border"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onDateRangeChange",
+                "onContentTypeFilterChange",
+                "onExportReport"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Badge",
+                "Popover",
+                "PopoverTrigger",
+                "PopoverContent"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Reach Summary",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "AnalyticsSummaryCards",
+              "props": {
+                "cards": [
+                  {
+                    "label": "Total Impressions",
+                    "value": "342,910",
+                    "change": "+24.8%",
+                    "detail": "vs previous period"
+                  },
+                  {
+                    "label": "Audience Watch Time",
+                    "value": "5,120 hrs",
+                    "change": "+14.2%",
+                    "detail": "3.2 mins avg per session"
+                  },
+                  {
+                    "label": "Engagement Rate",
+                    "value": "6.4%",
+                    "change": "+8.5%",
+                    "detail": "4.8% conversion"
+                  },
+                  {
+                    "label": "Unique Readers",
+                    "value": "89,400",
+                    "change": "+31.0%",
+                    "detail": "Organic search & social"
+                  }
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "analytics_data",
+              "event_handlers": [
+                "onMetricCardSelect"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Performance Visualizations",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ReachTrendsChart",
+              "props": {
+                "viewType": "daily",
+                "chartTitle": "Audience Reach & Growth Over Time"
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "analytics_data",
+              "event_handlers": [
+                "onChartIntervalToggle",
+                "onSeriesToggle"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Tabs",
+                "TabsList",
+                "TabsTrigger",
+                "Badge"
+              ]
+            },
+            {
+              "name": "VideoRetentionAnalytics",
+              "props": {
+                "peakWatchMinute": "02:14",
+                "completionRateAvg": "72%"
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": "videos",
+              "event_handlers": [
+                "onInspectVideoRetention"
+              ],
+              "image_keywords": [
+                "chart",
+                "video"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Progress",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Top Performing Content Leaderboard",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ContentPerformanceLeaderboard",
+              "props": {
+                "pageSize": 10
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "posts",
+              "event_handlers": [
+                "onSortLeaderboard",
+                "onViewPostAnalytics"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Badge",
+                "Button",
+                "Input"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Analytics & Reach Insights",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "Admin",
+      "route": "/admin",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Admin Overview Header",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "AdminOverviewHero",
+              "props": {
+                "orgName": "ContentReach Enterprise",
+                "planTier": "Enterprise Scale",
+                "adminName": "System Administrator"
+              },
+              "images": null,
+              "styling": {
+                "container": "p-6 rounded-xl bg-gradient-to-r from-slate-900 to-indigo-950 text-white shadow-md"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "organizations",
+              "event_handlers": [
+                "onQuickActionClick"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Badge",
+                "Button"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Administrative Modules",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "AdminModulesGrid",
+              "props": {
+                "modules": [
+                  {
+                    "icon": "Users",
+                    "path": "/admin/users",
+                    "stats": "12 Active Users",
+                    "title": "User & Role Management",
+                    "description": "Manage team members, assign publishing roles, and handle invites."
+                  },
+                  {
+                    "icon": "Plug",
+                    "path": "/admin/api-integrations",
+                    "stats": "5 Connected Apps",
+                    "title": "API & Marketing Integrations",
+                    "description": "Configure webhooks, YouTube/Vimeo syncing, and social publishing keys."
+                  },
+                  {
+                    "icon": "Sliders",
+                    "path": "/admin/system-settings",
+                    "stats": "2FA Enforced",
+                    "title": "System & Security Settings",
+                    "description": "Configure domain aliases, storage quotas, and security policies."
+                  },
+                  {
+                    "icon": "FileText",
+                    "path": "/admin/system-reports",
+                    "stats": "99.98% Uptime",
+                    "title": "System Health & Reports",
+                    "description": "Audit logs, server response times, and monthly reach export archives."
+                  }
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 md:grid-cols-2 gap-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "users_roles",
+              "event_handlers": [
+                "onNavigateAdminModule"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "CardFooter",
+                "Button",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Infrastructure & Service Status",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "SystemHealthLiveWidget",
+              "props": {
+                "uptime": "99.98%",
+                "apiStatus": "Operational",
+                "dbLatency": "18ms",
+                "storageUsage": "64%"
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onRefreshHealthStatus"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Badge",
+                "Progress",
+                "Button"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "Admin Overview",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "AdminUsers",
+      "route": "/admin/users",
+      "locked": false,
+      "sections": [
+        {
+          "title": "User Management Header",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "UserManagementHeader",
+              "props": {
+                "availableRoles": [
+                  "All Roles",
+                  "Admin",
+                  "Content Manager",
+                  "Editor",
+                  "Contributor"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-border"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "users",
+              "event_handlers": [
+                "onSearchQueryChange",
+                "onFilterRoleChange",
+                "onOpenInviteModal"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Input",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Dialog",
+                "DialogTrigger",
+                "DialogContent",
+                "DialogHeader",
+                "DialogTitle",
+                "DialogDescription",
+                "DialogFooter",
+                "Label"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Team Members & Roles",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "UsersTableSection",
+              "props": {
+                "itemsPerPage": 10
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border shadow-sm p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "users_roles",
+              "event_handlers": [
+                "onSelectUser",
+                "onEditRole",
+                "onToggleStatus",
+                "onDeleteUser"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Badge",
+                "Button",
+                "Avatar",
+                "AvatarImage",
+                "AvatarFallback",
+                "DropdownMenu",
+                "DropdownMenuTrigger",
+                "DropdownMenuContent",
+                "DropdownMenuItem",
+                "DropdownMenuSeparator"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Role Capabilities & Permissions",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "RolePermissionsMatrix",
+              "props": {
+                "roles": [
+                  "Admin",
+                  "Content Manager",
+                  "Editor",
+                  "Contributor"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "roles",
+              "event_handlers": [
+                "onUpdatePermissionRule"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Checkbox",
+                "Badge",
+                "Button"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "User Management",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "AdminApiIntegrations",
+      "route": "/admin/api-integrations",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Integrations Header",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "IntegrationsHeader",
+              "props": {
+                "title": "API & Ecosystem Integrations",
+                "subtitle": "Connect ContentReach to video platforms, analytics suites, and social distribution networks."
+              },
+              "images": null,
+              "styling": {
+                "container": "flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-border"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onGenerateApiKey",
+                "onSearchIntegrations"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Input",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Marketing & Video Platforms",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ConnectedPlatformsGrid",
+              "props": {
+                "integrations": [
+                  {
+                    "id": "youtube",
+                    "name": "YouTube Data API v3",
+                    "category": "Video Hosting",
+                    "connected": true,
+                    "description": "Auto-publish video blogs directly to YouTube channels."
+                  },
+                  {
+                    "id": "vimeo",
+                    "name": "Vimeo Enterprise",
+                    "category": "Video Hosting",
+                    "connected": true,
+                    "description": "Direct player embed and video transcoding sync."
+                  },
+                  {
+                    "id": "ga4",
+                    "name": "Google Analytics 4",
+                    "category": "Analytics",
+                    "connected": true,
+                    "description": "Stream custom reach and event metrics into Google Analytics 4."
+                  },
+                  {
+                    "id": "hubspot",
+                    "name": "HubSpot CRM",
+                    "category": "Marketing Automation",
+                    "connected": false,
+                    "description": "Sync subscriber leads and nurture workflow contacts."
+                  },
+                  {
+                    "id": "linkedin",
+                    "name": "LinkedIn Marketing API",
+                    "category": "Social Distribution",
+                    "connected": true,
+                    "description": "Cross-post blog teasers and video snippets automatically."
+                  },
+                  {
+                    "id": "zapier",
+                    "name": "Zapier Webhooks",
+                    "category": "Automation",
+                    "connected": false,
+                    "description": "Trigger custom workflows when new content publishes."
+                  }
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              },
+              "has_state": true,
+              "image_urls": [],
+              "data_source": null,
+              "event_handlers": [
+                "onToggleIntegration",
+                "onConfigureIntegration"
+              ],
+              "image_keywords": [
+                "technology",
+                "code"
+              ],
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "CardFooter",
+                "Button",
+                "Badge",
+                "Switch",
+                "Dialog",
+                "DialogTrigger",
+                "DialogContent",
+                "DialogHeader",
+                "DialogTitle",
+                "DialogDescription"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "API Tokens & Outgoing Webhooks",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ApiKeysWebhooksSection",
+              "props": {
+                "activeKeysCount": 3,
+                "registeredWebhooksCount": 2
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onCopyApiKey",
+                "onRevokeKey",
+                "onCreateWebhook"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Badge",
+                "Button",
+                "Input"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "API & Marketing Integrations",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "AdminSystemSettings",
+      "route": "/admin/system-settings",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Settings Navigation",
+          "images": null,
+          "spacing": "tight",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "SettingsNavTabs",
+              "props": {
+                "tabs": [
+                  "General & Organization",
+                  "Content & Video Encoding",
+                  "Security & Compliance",
+                  "Storage & CDN"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "mb-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onTabChange"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Tabs",
+                "TabsList",
+                "TabsTrigger"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Organization & Media Encoding",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "OrgDetailsForm",
+              "props": {
+                "primaryDomain": "blog.contentreach.io",
+                "defaultOrgName": "ContentReach Media Inc."
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "organizations",
+              "event_handlers": [
+                "onSaveOrganizationSettings",
+                "onUploadLogo"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "CardFooter",
+                "Input",
+                "Label",
+                "Button",
+                "Badge"
+              ]
+            },
+            {
+              "name": "VideoEncodingSettingsCard",
+              "props": {
+                "maxVideoFileSize": "1024MB",
+                "transcodingPresets": [
+                  "1080p Full HD",
+                  "4K Ultra HD",
+                  "720p Mobile-optimized"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": "videos",
+              "event_handlers": [
+                "onSaveVideoSettings"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "CardFooter",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Switch",
+                "Label",
+                "Button"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Security & Access Controls",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "SecurityComplianceSection",
+              "props": {
+                "enforce2FA": true,
+                "ssoProvider": "SAML 2.0 / Okta",
+                "sessionTimeoutMinutes": 60
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onToggle2FAEnforcement",
+                "onUpdateSessionTimeout",
+                "onSaveSecurityPolicies"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "CardFooter",
+                "Switch",
+                "Label",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Button",
+                "Badge",
+                "Alert",
+                "AlertDescription"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "System & Security Settings",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    },
+    {
+      "name": "AdminSystemReports",
+      "route": "/admin/system-reports",
+      "locked": false,
+      "sections": [
+        {
+          "title": "Reports Actions Header",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "ReportsHeaderActions",
+              "props": {
+                "reportTypes": [
+                  "All Reports",
+                  "Reach & Performance",
+                  "System Health & Uptime",
+                  "Audit Logs",
+                  "Media CDN Bandwidth"
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-border"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onGenerateReport",
+                "onFilterReportType",
+                "onDownloadReportArchive"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Button",
+                "Select",
+                "SelectTrigger",
+                "SelectValue",
+                "SelectContent",
+                "SelectItem",
+                "Dialog",
+                "DialogTrigger",
+                "DialogContent",
+                "DialogHeader",
+                "DialogTitle",
+                "DialogDescription",
+                "DialogFooter"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Live System Health",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "grid",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "SystemHealthStatusGrid",
+              "props": {
+                "metrics": [
+                  {
+                    "label": "Platform Uptime",
+                    "value": "99.98%",
+                    "change": "Zero outages (30d)",
+                    "status": "healthy"
+                  },
+                  {
+                    "label": "API Response Time",
+                    "value": "42 ms",
+                    "change": "-4ms from last week",
+                    "status": "healthy"
+                  },
+                  {
+                    "label": "Video CDN Egress",
+                    "value": "4.8 TB",
+                    "change": "+1.2 TB this month",
+                    "status": "normal"
+                  },
+                  {
+                    "label": "Video Transcode Errors",
+                    "value": "0.01%",
+                    "change": "99.99% success rate",
+                    "status": "healthy"
+                  }
+                ]
+              },
+              "images": null,
+              "styling": {
+                "container": "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onInspectHealthMetric"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardContent",
+                "Badge"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Generated Reports & Export Archive",
+          "images": null,
+          "spacing": "loose",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "GeneratedReportsTable",
+              "props": {
+                "itemsPerPage": 8
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onDownloadScheduledReport",
+                "onDeleteScheduledReport",
+                "onTriggerReportRun"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Badge",
+                "Button",
+                "DropdownMenu",
+                "DropdownMenuTrigger",
+                "DropdownMenuContent",
+                "DropdownMenuItem"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Security & Operational Audit Logs",
+          "images": null,
+          "spacing": "normal",
+          "image_urls": null,
+          "section_type": "content",
+          "image_keywords": null,
+          "component_specs": [
+            {
+              "name": "SystemAuditLogSection",
+              "props": {
+                "pageSize": 10
+              },
+              "images": null,
+              "styling": {
+                "container": "w-full bg-card rounded-xl border border-border p-6"
+              },
+              "has_state": true,
+              "image_urls": null,
+              "data_source": null,
+              "event_handlers": [
+                "onFilterAuditLogs",
+                "onExportAuditLogsCsv"
+              ],
+              "image_keywords": null,
+              "shadcn_components": [
+                "Card",
+                "CardHeader",
+                "CardTitle",
+                "CardDescription",
+                "CardContent",
+                "Table",
+                "TableHeader",
+                "TableBody",
+                "TableHead",
+                "TableRow",
+                "TableCell",
+                "Badge",
+                "Input",
+                "Button"
+              ]
+            }
+          ]
+        }
+      ],
+      "display_title": "System Health & Reports",
+      "required_imports": [
+        "lucide-react",
+        "react-router-dom"
+      ],
+      "has_dynamic_params": false
+    }
+  ],
+  "layout": {
+    "name": "Layout",
+    "props": {
+      "user": {
+        "name": "Sarah Chen",
+        "role": "Content Manager",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
+      },
+      "appName": "ContentReach",
+      "navSections": [
+        {
+          "items": [
+            {
+              "icon": "LayoutDashboard",
+              "path": "/",
+              "label": "Dashboard"
+            },
+            {
+              "icon": "PenSquare",
+              "path": "/create-post",
+              "label": "Create Post"
+            },
+            {
+              "icon": "FolderVideo",
+              "path": "/media-library",
+              "label": "Media Library"
+            },
+            {
+              "icon": "BarChart3",
+              "path": "/analytics",
+              "label": "Analytics"
+            }
+          ],
+          "title": "Content Studio"
+        },
+        {
+          "items": [
+            {
+              "icon": "ShieldCheck",
+              "path": "/admin",
+              "label": "Admin Overview"
+            },
+            {
+              "icon": "Plug",
+              "path": "/admin/api-integrations",
+              "label": "API Integrations"
+            },
+            {
+              "icon": "Sliders",
+              "path": "/admin/system-settings",
+              "label": "System Settings"
+            },
+            {
+              "icon": "FileText",
+              "path": "/admin/system-reports",
+              "label": "System Reports"
+            }
+          ],
+          "title": "Administration"
+        }
+      ]
+    },
+    "images": null,
+    "styling": {
+      "main": "flex-1 overflow-y-auto p-4 md:p-8 bg-background",
+      "header": "h-16 border-b border-border bg-card/80 backdrop-blur px-6 flex items-center justify-between sticky top-0 z-40",
+      "sidebar": "w-64 border-r border-border bg-card flex flex-col justify-between hidden md:flex shrink-0",
+      "wrapper": "min-h-screen bg-background flex flex-col md:flex-row"
+    },
+    "has_state": true,
+    "image_urls": null,
+    "data_source": null,
+    "event_handlers": [
+      "onNavigate",
+      "onToggleSidebar",
+      "onLogout"
+    ],
+    "image_keywords": null,
+    "shadcn_components": [
+      "Sheet",
+      "SheetContent",
+      "SheetTrigger",
+      "Button",
+      "Avatar",
+      "AvatarImage",
+      "AvatarFallback",
+      "Badge",
+      "DropdownMenu",
+      "DropdownMenuContent",
+      "DropdownMenuItem",
+      "DropdownMenuTrigger",
+      "DropdownMenuSeparator",
+      "Input",
+      "Separator"
+    ]
+  },
+  "design_notes": null,
+  "project_name": "ContentReach Blog App",
+  "design_tokens": {
+    "dark": {
+      "card": "#0f172a",
+      "ring": "#6366f1",
+      "input": "#1e293b",
+      "muted": "#1e293b",
+      "accent": "#1e1b4b",
+      "border": "#1e293b",
+      "radius": "0.625rem",
+      "primary": "#6366f1",
+      "secondary": "#1e293b",
+      "background": "#090d16",
+      "foreground": "#f8fafc",
+      "destructive": "#f87171",
+      "card_foreground": "#f8fafc",
+      "muted_foreground": "#94a3b8",
+      "accent_foreground": "#c7d2fe",
+      "primary_foreground": "#ffffff",
+      "secondary_foreground": "#f1f5f9",
+      "destructive_foreground": "#ffffff"
+    },
+    "light": {
+      "card": "#ffffff",
+      "ring": "#6366f1",
+      "input": "#e2e8f0",
+      "muted": "#f1f5f9",
+      "accent": "#eef2ff",
+      "border": "#e2e8f0",
+      "radius": "0.625rem",
+      "primary": "#4f46e5",
+      "secondary": "#f1f5f9",
+      "background": "#f8fafc",
+      "foreground": "#0f172a",
+      "destructive": "#ef4444",
+      "card_foreground": "#0f172a",
+      "muted_foreground": "#64748b",
+      "accent_foreground": "#4338ca",
+      "primary_foreground": "#ffffff",
+      "secondary_foreground": "#0f172a",
+      "destructive_foreground": "#ffffff"
+    },
+    "gradients": [
+      {
+        "key": "hero-glow",
+        "value": "linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.1) 100%)"
+      },
+      {
+        "key": "card-highlight",
+        "value": "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%)"
+      }
+    ]
+  },
+  "layout_archetype": "dashboard",
+  "shared_components": [
+    {
+      "name": "StatCard",
+      "props": {
+        "icon": "TrendingUp",
+        "title": "Reach Metric",
+        "trend": "up",
+        "value": "124,500",
+        "change": "+12%",
+        "description": "vs last 30 days"
+      },
+      "images": null,
+      "styling": {
+        "card": "bg-card border border-border shadow-sm rounded-xl p-5 hover:border-primary/50 transition-colors",
+        "value": "text-2xl font-bold tracking-tight text-foreground",
+        "header": "flex items-center justify-between pb-2"
+      },
+      "has_state": false,
+      "image_urls": null,
+      "data_source": null,
+      "event_handlers": [
+        "onClick"
+      ],
+      "image_keywords": null,
+      "shadcn_components": [
+        "Card",
+        "CardHeader",
+        "CardTitle",
+        "CardContent",
+        "Badge"
+      ]
+    },
+    {
+      "name": "ContentStatusBadge",
+      "props": {
+        "status": "published"
+      },
+      "images": null,
+      "styling": {
+        "badge": "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium"
+      },
+      "has_state": false,
+      "image_urls": null,
+      "data_source": null,
+      "event_handlers": null,
+      "image_keywords": null,
+      "shadcn_components": [
+        "Badge"
+      ]
+    },
+    {
+      "name": "VideoPlayerModal",
+      "props": {
+        "isOpen": false,
+        "videoUrl": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        "videoTitle": "Video Preview",
+        "videoDuration": "04:15"
+      },
+      "images": null,
+      "styling": {
+        "dialog": "max-w-3xl w-full p-0 overflow-hidden bg-card border-border",
+        "playerContainer": "relative aspect-video w-full bg-black flex items-center justify-center"
+      },
+      "has_state": true,
+      "image_urls": [],
+      "data_source": null,
+      "event_handlers": [
+        "onClose",
+        "onPlayToggle"
+      ],
+      "image_keywords": [
+        "video",
+        "stream"
+      ],
+      "shadcn_components": [
+        "Dialog",
+        "DialogContent",
+        "DialogHeader",
+        "DialogTitle",
+        "DialogDescription",
+        "DialogFooter",
+        "Button",
+        "Badge",
+        "Progress"
+      ]
+    }
+  ]
+}

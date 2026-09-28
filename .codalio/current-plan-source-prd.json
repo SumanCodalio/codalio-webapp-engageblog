@@ -1,0 +1,819 @@
+{
+  "name": "EngageBlog",
+  "elevator_pitch": "For content teams struggling to maximize their content's impact, ContentReach is a blog posting app that provides advanced analytics and seamless video integration. Unlike generic blogging platforms, ContentReach empowers teams with actionable insights and diverse media support, ensuring their content not only gets published but truly resonates and expands its audience.",
+  "problem_statement": "Content teams face challenges in effectively distributing their content and understanding its performance, leading to suboptimal content reach and engagement.",
+  "solution": "ContentReach provides a comprehensive blog posting platform with integrated analytics and robust video support, enabling content teams to publish diverse content, track its performance, and optimize strategies for improved reach.",
+  "vision": "To be the leading platform for content teams, empowering them to create, publish, and amplify high-performing content that consistently expands their audience and achieves their strategic goals.",
+  "competitors": "WordPress, Medium, HubSpot Blog, Ghost, Squarespace.",
+  "success_metrics": "Increased content reach (e.g., page views, unique visitors), higher engagement rates (e.g., comments, shares), improved content team efficiency, and growth in video content consumption.",
+  "design_principles": "The design prioritizes efficiency and clarity, enabling content teams to quickly publish and manage diverse content, especially video. It emphasizes data-driven insights through an intuitive analytics dashboard to improve content reach and performance.",
+  "sitemap": "- Dashboard (/) - Main dashboard for content overview and quick actions.\n- Login (/login) - User login page.\n- Create Post (/create-post) - Page for creating and editing new blog posts.\n- Media Library (/media-library) - Central repository for managing media assets, including video uploads.\n- Analytics Dashboard (/analytics) - Dashboard displaying content performance and audience insights.\n- Admin Panel (/admin) - Administrative section for managing app settings and users.\n  - User Management (/admin/users) - Manage user accounts and roles.\n- API Integrations (/admin/api-integrations) - Admin panel for managing API integrations.\n- System Settings (/admin/system-settings) - Admin panel for reviewing system settings related to scalability and security.\n- System Reports (/admin/system-reports) - Admin panel for generating and viewing system performance and health reports.",
+  "navigation_design": "\n**Content Manager Navigation:**\n*   **Dashboard**: Accessible from `/` after login, providing an overview of content performance and quick access to publishing tools.\n*   **Create Post**: Direct link to `/create-post` for drafting and publishing new blog entries, including video content.\n*   **Media Library**: Link to `/media-library` for uploading and managing all media assets.\n*   **Analytics**: Dedicated section at `/analytics` for in-depth content performance metrics and insights.\n*   **Logout**: Option to securely log out of the application.\n\n**Admin Navigation:**\n*   **Admin Panel**: Entry point to administrative functions, potentially at `/admin`.\n*   **User Management**: Direct access to `/admin/users` for managing user accounts and roles.\n*   **Logout**: Option to securely log out of the application.\n",
+  "key_features": [
+    {
+      "feature_name": "Analytics Dashboard",
+      "feature_description": "Provides insights into content performance, audience engagement, and reach."
+    },
+    {
+      "feature_name": "Video Content Support",
+      "feature_description": "Enables seamless uploading, embedding, and management of video content."
+    },
+    {
+      "feature_name": "Content Publishing Tools",
+      "feature_description": "Intuitive interface for creating, editing, and publishing blog posts."
+    },
+    {
+      "feature_name": "User Management",
+      "feature_description": "Admin tools for managing content team members and their roles."
+    },
+    {
+      "feature_name": "API Integrations",
+      "feature_description": "For connecting with other marketing and analytics tools."
+    },
+    {
+      "feature_name": "Scalability & Security",
+      "feature_description": "Infrastructure to handle growing content volume and ensure data protection."
+    },
+    {
+      "feature_name": "Monitoring & Reporting",
+      "feature_description": "Tools for tracking application health and generating performance reports."
+    }
+  ],
+  "user_personas": [
+    {
+      "name": "Sarah Chen",
+      "goals": [
+        "Improve content reach",
+        "Understand content performance",
+        "Efficiently publish video content",
+        "Streamline content workflows"
+      ],
+      "age_role": "32, Content Manager (application role: content_manager)",
+      "pain_points": [
+        "Difficulty in measuring content effectiveness",
+        "Limited support for rich media",
+        "Inefficient publishing processes",
+        "Lack of actionable insights"
+      ],
+      "preferred_device": "Desktop/Laptop"
+    }
+  ],
+  "user_stories": [
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "Create and Publish Text Post",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to create and publish a blog post with text",
+        "so_that": "I can share written content with my audience"
+      },
+      "key_feature": "Content Publishing Tools",
+      "acceptance_criteria": [
+        "Only content_team_member can access /create-post.",
+        "User can enter and format text content using a rich text editor.",
+        "User can save a post as a draft.",
+        "User can preview the post before publishing.",
+        "User can publish the post, making it live.",
+        "Published posts are visible on the blog.",
+        "The data model stores approved and the application uses it as described in this story.",
+        "The data model stores profile completed and the application uses it as described in this story."
+      ]
+    },
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "Edit Existing Post",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to edit an already published post",
+        "so_that": "I can correct errors or update information"
+      },
+      "key_feature": "Content Publishing Tools",
+      "acceptance_criteria": [
+        "Only content_team_member can edit published posts.",
+        "User can select a published post from a list and enter edit mode.",
+        "User can modify text and media within the post.",
+        "User can save changes, which are immediately reflected on the live blog."
+      ]
+    },
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "Upload Video Content",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to upload video files",
+        "so_that": "I can include rich media in my blog posts"
+      },
+      "key_feature": "Video Content Support",
+      "acceptance_criteria": [
+        "Only content_team_member can access /media-library.",
+        "The app provides an upload UI for video data, accepting MP4, MOV, and AVI formats, and visibly confirms a successful import.",
+        "User can add a title and description to the uploaded video.",
+        "Uploaded videos are stored in the media library.",
+        "The data model stores duration and the application uses it as described in this story.",
+        "The data model stores url and the application uses it as described in this story."
+      ]
+    },
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "Embed Video in Post",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to embed uploaded videos into my blog posts",
+        "so_that": "I can create engaging multimedia content"
+      },
+      "key_feature": "Video Content Support",
+      "acceptance_criteria": [
+        "Only content_team_member can embed videos.",
+        "User can select an uploaded video from the media library within the post editor.",
+        "The selected video is correctly embedded and displayed in the post preview.",
+        "Embedded videos play correctly on the published blog post."
+      ]
+    },
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "Admin Login",
+      "user_story": {
+        "as_a": "admin",
+        "i_want": "to securely log in to the application",
+        "so_that": "I can manage users and application settings"
+      },
+      "key_feature": "User Management",
+      "acceptance_criteria": [
+        "Unauthenticated users are redirected to /login when accessing /admin/dashboard.",
+        "User can enter email and password on the login page.",
+        "Successful login redirects admin to /admin/dashboard.",
+        "Failed login attempts display an error message."
+      ]
+    },
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "Manage Content Team Members",
+      "user_story": {
+        "as_a": "admin",
+        "i_want": "to add, edit, and remove content_team_member accounts",
+        "so_that": "I can control who can publish content"
+      },
+      "key_feature": "User Management",
+      "acceptance_criteria": [
+        "Only admin can access /admin/users.",
+        "Admin can view a list of existing content_team_member accounts.",
+        "Admin can create a new content_team_member account with a name, email, and password.",
+        "Admin can edit an existing content_team_member's details.",
+        "Admin can deactivate or delete a content_team_member account.",
+        "The data model stores first name and the application uses it as described in this story.",
+        "The data model stores last name and the application uses it as described in this story."
+      ]
+    },
+    {
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "title": "User Logout",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to log out of the application",
+        "so_that": "I can secure my account"
+      },
+      "key_feature": "User Management",
+      "acceptance_criteria": [
+        "User can click a logout button.",
+        "Successful logout redirects the user to /login.",
+        "After logout, the user cannot access protected routes without re-authenticating."
+      ]
+    },
+    {
+      "phase": "Phase 2: Analytics & Integrations",
+      "title": "View Content Performance Metrics",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to view key performance metrics for my content",
+        "so_that": "I can understand what resonates with my audience"
+      },
+      "key_feature": "Analytics Dashboard",
+      "acceptance_criteria": [
+        "Only content_team_member can access /analytics.",
+        "Dashboard displays total views, unique visitors, and engagement rate for all content.",
+        "Metrics are presented in an easy-to-understand visual format (e.g., charts, graphs).",
+        "User can see performance metrics for individual posts."
+      ]
+    },
+    {
+      "phase": "Phase 2: Analytics & Integrations",
+      "title": "Filter Analytics Data",
+      "user_story": {
+        "as_a": "content_team_member",
+        "i_want": "to filter analytics data by date range and content type",
+        "so_that": "I can analyze specific campaigns or content formats"
+      },
+      "key_feature": "Analytics Dashboard",
+      "acceptance_criteria": [
+        "Only content_team_member can filter analytics data.",
+        "User can select a custom date range to view data.",
+        "User can filter data to show only video posts or text posts.",
+        "Filtered data updates the dashboard in real-time.",
+        "The data model stores event type and the application uses it as described in this story."
+      ]
+    },
+    {
+      "phase": "Phase 2: Analytics & Integrations",
+      "title": "Connect to Marketing Tools",
+      "user_story": {
+        "as_a": "admin",
+        "i_want": "to integrate the blog app with external marketing tools",
+        "so_that": "I can automate content distribution and campaign tracking"
+      },
+      "key_feature": "API Integrations",
+      "acceptance_criteria": [
+        "Only admin can access /admin/integrations.",
+        "Admin can view a list of available marketing tool integrations (e.g., Mailchimp, HubSpot).",
+        "Admin can configure API keys or authentication tokens for selected integrations.",
+        "Successful integration is confirmed with a status indicator."
+      ]
+    },
+    {
+      "phase": "Phase 2: Analytics & Integrations",
+      "title": "System Health Monitoring",
+      "user_story": {
+        "as_a": "system",
+        "i_want": "to monitor the application's health and performance",
+        "so_that": "I can ensure continuous availability and identify issues proactively"
+      },
+      "key_feature": "Monitoring & Reporting",
+      "acceptance_criteria": [
+        "System generates alerts for critical errors (e.g., server downtime, database connection issues).",
+        "System logs application performance metrics (e.g., response times, resource utilization).",
+        "Monitoring data is accessible to admin via a dedicated dashboard (e.g., /admin/monitoring)."
+      ]
+    },
+    {
+      "phase": "Phase 2: Analytics & Integrations",
+      "title": "Data Backup and Restore",
+      "user_story": {
+        "as_a": "system",
+        "i_want": "to perform regular data backups",
+        "so_that": "I can recover content and user data in case of data loss"
+      },
+      "key_feature": "Scalability & Security",
+      "acceptance_criteria": [
+        "System performs automated daily backups of all application data.",
+        "Backup files are stored securely and redundantly.",
+        "admin can initiate a data restore process from a recent backup."
+      ]
+    },
+    {
+      "phase": "Phase 2: Analytics & Integrations",
+      "title": "Role-Based Access Control",
+      "user_story": {
+        "as_a": "system",
+        "i_want": "to enforce role-based access control",
+        "so_that": "users can only access features and data relevant to their assigned roles"
+      },
+      "key_feature": "Scalability & Security",
+      "acceptance_criteria": [
+        "content_team_member cannot access /admin routes.",
+        "admin has full access to all application features and data.",
+        "Unauthorized access attempts are logged and blocked."
+      ]
+    }
+  ],
+  "user_flows": [
+    {
+      "steps": [
+        "[Content Team Member] Navigate to /create-post",
+        "[Content Team Member] Write and format blog content",
+        "[Content Team Member] Add media (images, videos)",
+        "[Content Team Member] Preview post",
+        "[Content Team Member] Publish post and navigate to /"
+      ],
+      "flow_name": "Create and Publish Blog Post",
+      "primary_role": "content_team_member",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Content Team Member] Navigate to /analytics",
+        "[Content Team Member] View content performance metrics",
+        "[Content Team Member] Filter data by date range or content type"
+      ],
+      "flow_name": "View Analytics Dashboard",
+      "primary_role": "content_team_member",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Content Team Member] Navigate to /media-library",
+        "[Content Team Member] Select video file for upload",
+        "[Content Team Member] Add video metadata",
+        "[Content Team Member] Confirm upload and navigate to /media-library"
+      ],
+      "flow_name": "Upload Video Content",
+      "primary_role": "content_team_member",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Content Team Member] Navigate to /login",
+        "[Content Team Member] Enter credentials",
+        "[Content Team Member] Submit login form and navigate to /"
+      ],
+      "flow_name": "Login",
+      "primary_role": "content_team_member",
+      "auth_required": false
+    },
+    {
+      "steps": [
+        "[Content Team Member] Click logout button",
+        "[Content Team Member] Confirm logout and navigate to /login"
+      ],
+      "flow_name": "Logout",
+      "primary_role": "content_team_member",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Admin] Navigate to /admin/users",
+        "[Admin] View list of users",
+        "[Admin] Add, edit, or remove user accounts",
+        "[Admin] Assign user roles"
+      ],
+      "flow_name": "Manage Users",
+      "primary_role": "admin",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Admin] Navigate to /admin/api-integrations",
+        "[Admin] Configure API settings",
+        "[Admin] Save changes"
+      ],
+      "flow_name": "Manage API Integrations",
+      "primary_role": "admin",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Admin] Navigate to /admin/system-settings",
+        "[Admin] Review security configurations",
+        "[Admin] Monitor system performance metrics"
+      ],
+      "flow_name": "Review System Settings",
+      "primary_role": "admin",
+      "auth_required": true
+    },
+    {
+      "steps": [
+        "[Admin] Navigate to /admin/system-reports",
+        "[Admin] Select report type and parameters",
+        "[Admin] Generate and view report"
+      ],
+      "flow_name": "Generate System Reports",
+      "primary_role": "admin",
+      "auth_required": true
+    }
+  ],
+  "target_audience": [
+    {
+      "name": "Content Team Member",
+      "pain_points": [
+        "Difficulty in measuring content effectiveness",
+        "Limited support for rich media",
+        "Inefficient publishing processes",
+        "Lack of actionable insights"
+      ],
+      "demographics": "Professionals working in marketing, communications, or editorial roles within organizations.",
+      "needs_and_goals": [
+        "Improve content reach",
+        "Understand content performance",
+        "Efficiently publish diverse content (including video)",
+        "Streamline content workflows"
+      ]
+    }
+  ],
+  "user_journeys": [
+    {
+      "steps": [
+        {
+          "actor": "content_manager",
+          "description": "Navigate to /media-library to upload video."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Select video file and add metadata."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Confirm upload."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Navigate to /create-post to create a new blog post."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Embed the uploaded video into the post."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Add text content and optimize for SEO."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Preview the post."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Publish the video post."
+        }
+      ],
+      "context": "Sarah needs to publish a new video series.",
+      "trigger": "A new video series is ready for publication."
+    },
+    {
+      "steps": [
+        {
+          "actor": "content_manager",
+          "description": "Navigate to /analytics dashboard."
+        },
+        {
+          "actor": "content_manager",
+          "description": "View overall content performance metrics."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Filter data to focus on video content."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Analyze engagement rates and reach for specific video posts."
+        },
+        {
+          "actor": "content_manager",
+          "description": "Identify top-performing videos and areas for improvement."
+        }
+      ],
+      "context": "Sarah wants to understand the performance of recently published video content.",
+      "trigger": "Weekly content performance review."
+    }
+  ],
+  "phasing": [
+    {
+      "features": [
+        "Content Publishing Tools",
+        "Video Content Support",
+        "User Management"
+      ],
+      "rationale": "This phase delivers the core functionality for content teams to create, publish, and manage video blog posts, along with essential user administration. It provides a complete, demonstrable product for initial user adoption.",
+      "phase_name": "Phase 1: Minimum Viable Product (MVP)"
+    },
+    {
+      "features": [
+        "Analytics Dashboard",
+        "API Integrations",
+        "Monitoring & Reporting",
+        "Scalability & Security"
+      ],
+      "rationale": "Building on the MVP, this phase introduces critical analytics for content performance, enables integration with external tools, and enhances platform stability and security for broader impact and growth.",
+      "phase_name": "Phase 2: Analytics & Integrations"
+    }
+  ],
+  "mermaid_erd_diagram": "erDiagram\nUser {\n  INT id\n  TIMESTAMP created_at\n  TIMESTAMP updated_at\n}\nOrganization {\n  INT id\n  TIMESTAMP created_at\n  TIMESTAMP updated_at\n}\nRole {\n  INT id\n  TIMESTAMP created_at\n  TIMESTAMP updated_at\n}\nUsersRole {\n  INT id\n  TIMESTAMP created_at\n  TIMESTAMP updated_at\n}\nPost {\n  INT organization_id\n  INT user_id\n  VARCHAR title\n  TEXT content\n  ENUM status\n  TIMESTAMP published_at\n}\nVideo {\n  INT organization_id\n  INT user_id\n  INT post_id\n  VARCHAR title\n  VARCHAR url\n  INT duration\n}\nAnalyticsData {\n  INT organization_id\n  INT post_id\n  VARCHAR event_type\n  JSONB event_data\n  TIMESTAMP recorded_at\n}\nOrganization }o--o{ User : \"M:N\"\nUser ||--o{ UsersRole : \"1:N\"\nOrganization ||--o{ UsersRole : \"1:N\"\nRole ||--o{ UsersRole : \"1:N\"\nOrganization ||--o{ Post : \"1:N\"\nUser ||--o{ Post : \"1:N\"\nPost ||--o{ Video : \"1:N\"\nPost ||--o{ AnalyticsData : \"1:N\"\nOrganization ||--o{ Video : \"1:N\"\nUser ||--o{ Video : \"1:N\"\nOrganization ||--o{ AnalyticsData : \"1:N\"",
+  "schema": [
+    {
+      "model": "User",
+      "table": "users",
+      "provided_by": "rhino_project_core",
+      "rhino_owner": "organization"
+    },
+    {
+      "model": "Organization",
+      "table": "organizations",
+      "provided_by": "rhino_project_organizations",
+      "rhino_owner": "organization",
+      "associations": [
+        {
+          "name": "users",
+          "type": "has_and_belongs_to_many"
+        }
+      ]
+    },
+    {
+      "model": "Role",
+      "table": "roles",
+      "provided_by": "rhino_project_organizations",
+      "rhino_owner": "organization"
+    },
+    {
+      "model": "UsersRole",
+      "table": "users_roles",
+      "provided_by": "rhino_project_organizations",
+      "rhino_owner": "organization",
+      "associations": [
+        {
+          "name": "user",
+          "type": "belongs_to"
+        },
+        {
+          "name": "organization",
+          "type": "belongs_to"
+        },
+        {
+          "name": "role",
+          "type": "belongs_to"
+        }
+      ]
+    },
+    {
+      "model": "Post",
+      "table": "posts",
+      "columns": [
+        {
+          "name": "organization_id",
+          "type": "references"
+        },
+        {
+          "name": "user_id",
+          "type": "references"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "text"
+        },
+        {
+          "name": "status",
+          "type": "enum"
+        },
+        {
+          "name": "published_at",
+          "type": "datetime"
+        }
+      ],
+      "rhino_owner": "organization",
+      "validations": [],
+      "associations": [
+        {
+          "name": "organization",
+          "type": "belongs_to"
+        },
+        {
+          "name": "user",
+          "type": "belongs_to"
+        },
+        {
+          "name": "videos",
+          "type": "has_many"
+        },
+        {
+          "name": "analytics_data",
+          "type": "has_many"
+        }
+      ]
+    },
+    {
+      "model": "Video",
+      "table": "videos",
+      "columns": [
+        {
+          "name": "organization_id",
+          "type": "references"
+        },
+        {
+          "name": "user_id",
+          "type": "references"
+        },
+        {
+          "name": "post_id",
+          "type": "references"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "duration",
+          "type": "integer"
+        }
+      ],
+      "rhino_owner": "organization",
+      "validations": [
+        "presence: true"
+      ],
+      "associations": [
+        {
+          "name": "organization",
+          "type": "belongs_to"
+        },
+        {
+          "name": "user",
+          "type": "belongs_to"
+        },
+        {
+          "name": "post",
+          "type": "belongs_to"
+        }
+      ]
+    },
+    {
+      "model": "AnalyticsData",
+      "table": "analytics_data",
+      "columns": [
+        {
+          "name": "organization_id",
+          "type": "references"
+        },
+        {
+          "name": "post_id",
+          "type": "references"
+        },
+        {
+          "name": "event_type",
+          "type": "string"
+        },
+        {
+          "name": "event_data",
+          "type": "jsonb"
+        },
+        {
+          "name": "recorded_at",
+          "type": "datetime"
+        }
+      ],
+      "rhino_owner": "organization",
+      "validations": [
+        "presence: true"
+      ],
+      "associations": [
+        {
+          "name": "organization",
+          "type": "belongs_to"
+        },
+        {
+          "name": "post",
+          "type": "belongs_to"
+        }
+      ]
+    }
+  ],
+  "sample_data": [
+    {
+      "rows": [
+        {
+          "id": 1,
+          "title": "My First Blog Post",
+          "status": "Published",
+          "content": "This is the content of my first blog post.",
+          "user_id": 1,
+          "published_at": "2023-10-26 10:00:00",
+          "organization_id": 1
+        },
+        {
+          "id": 2,
+          "title": "Draft Post Idea",
+          "status": "Draft",
+          "content": "This post is still a draft.",
+          "user_id": 2,
+          "published_at": null,
+          "organization_id": 1
+        }
+      ],
+      "table_name": "posts"
+    },
+    {
+      "rows": [
+        {
+          "id": 1,
+          "url": "https://example.com/video1.mp4",
+          "title": "Introduction to Blogging",
+          "post_id": 1,
+          "user_id": 1,
+          "duration": 300,
+          "organization_id": 1
+        }
+      ],
+      "table_name": "videos"
+    },
+    {
+      "rows": [
+        {
+          "id": 1,
+          "post_id": 1,
+          "event_data": {
+            "ip_address": "192.168.1.1",
+            "user_agent": "Mozilla/5.0"
+          },
+          "event_type": "view",
+          "recorded_at": "2023-10-26 10:05:00",
+          "organization_id": 1
+        },
+        {
+          "id": 2,
+          "post_id": 1,
+          "event_data": {
+            "platform": "Twitter"
+          },
+          "event_type": "share",
+          "recorded_at": "2023-10-26 10:15:00",
+          "organization_id": 1
+        }
+      ],
+      "table_name": "analytics_data"
+    },
+    {
+      "rows": [
+        {
+          "id": "1",
+          "uid": "user1@example.com",
+          "name": "User 1",
+          "email": "user1@example.com",
+          "approved": "true",
+          "provider": "email",
+          "last_name": "Last1",
+          "created_at": "2026-09-22T12:45:57.303163+00:00",
+          "first_name": "First1",
+          "updated_at": "2026-09-22T12:45:57.303163+00:00",
+          "sign_in_count": "5",
+          "profile_completed": "true",
+          "encrypted_password": "hashed_password_1",
+          "allow_password_change": "false"
+        },
+        {
+          "id": "2",
+          "uid": "user2@example.com",
+          "name": "User 2",
+          "email": "user2@example.com",
+          "approved": "false",
+          "provider": "email",
+          "last_name": "Last2",
+          "created_at": "2026-09-22T12:45:57.303183+00:00",
+          "first_name": "First2",
+          "updated_at": "2026-09-22T12:45:57.303183+00:00",
+          "sign_in_count": "10",
+          "profile_completed": "false",
+          "encrypted_password": "hashed_password_2",
+          "allow_password_change": "false"
+        }
+      ],
+      "table_name": "users"
+    },
+    {
+      "rows": [
+        {
+          "id": "1",
+          "name": "Organization 1",
+          "created_at": "2026-09-22T12:45:57.303291+00:00",
+          "updated_at": "2026-09-22T12:45:57.303291+00:00"
+        },
+        {
+          "id": "2",
+          "name": "Organization 2",
+          "created_at": "2026-09-22T12:45:57.303296+00:00",
+          "updated_at": "2026-09-22T12:45:57.303296+00:00"
+        }
+      ],
+      "table_name": "organizations"
+    },
+    {
+      "rows": [
+        {
+          "id": "1",
+          "name": "Role 1",
+          "created_at": "2026-09-22T12:45:57.303305+00:00",
+          "updated_at": "2026-09-22T12:45:57.303305+00:00"
+        },
+        {
+          "id": "2",
+          "name": "Admin Role 2",
+          "created_at": "2026-09-22T12:45:57.303308+00:00",
+          "updated_at": "2026-09-22T12:45:57.303308+00:00"
+        }
+      ],
+      "table_name": "roles"
+    },
+    {
+      "rows": [
+        {
+          "id": "1",
+          "role_id": "1",
+          "user_id": "1",
+          "created_at": "2026-09-22T12:45:57.303321+00:00",
+          "updated_at": "2026-09-22T12:45:57.303321+00:00",
+          "organization_id": "1"
+        },
+        {
+          "id": "2",
+          "role_id": "2",
+          "user_id": "2",
+          "created_at": "2026-09-22T12:45:57.303343+00:00",
+          "updated_at": "2026-09-22T12:45:57.303343+00:00",
+          "organization_id": "1"
+        }
+      ],
+      "table_name": "users_roles"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+model: AnalyticsData
+slug: analytics_data
+table: analytics_data
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: false
+  pagination: true
+  per_page: 50
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  post_id:
+    type: foreignId
+    foreign_model: Post
+    nullable: true
+    index: true
+  event_type:
+    type: string
+    nullable: false
+    filterable: true
+    sortable: true
+  visitor_id:
+    type: string
+    nullable: true
+    filterable: true
+    index: true
+  event_data:
+    type: json
+    nullable: true
+  recorded_at:
+    type: datetime
+    nullable: false
+    filterable: true
+    sortable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+  - type: belongsTo
+    model: Post
+
+permissions:
+  admin:
+    actions: [index, show, store, update, destroy]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: [index, show, store]
+    show_fields: "*"
+    create_fields:
+      - post_id
+      - event_type
+      - visitor_id
+      - event_data
+      - recorded_at
+    update_fields: []
+  editor:
+    actions: [index, show, store]
+    show_fields: "*"
+    create_fields:
+      - post_id
+      - event_type
+      - visitor_id
+      - event_data
+      - recorded_at
+    update_fields: []
+  contributor:
+    actions: [index, show]
+    show_fields: [id, post_id, event_type, recorded_at, created_at]
+    create_fields: []
+    update_fields: []

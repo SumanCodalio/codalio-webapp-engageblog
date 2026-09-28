@@ -1,0 +1,34 @@
+
+ RUN  v2.1.9 /workspace/projects/1/314/workspace/client
+
+stderr | src/test/adminSurfaces.test.tsx > AdminOverviewPage — client-only acceptance criteria > AC-60: the overview lists the four admin modules
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/adminSurfaces.test.tsx (8 tests) 264ms
+stderr | src/test/dashboardPage.test.tsx > DashboardPage — client-only acceptance criteria > AC-59: the four reach metric cards are rendered from the analytics summary
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+stderr | src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-2: the body textarea is bound to state and persisted as `content`
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/dashboardPage.test.tsx (3 tests) 609ms
+   ✓ DashboardPage — client-only acceptance criteria > AC-59: the four reach metric cards are rendered from the analytics summary 405ms
+stderr | src/test/analyticsPage.test.tsx > AnalyticsPage — client-only acceptance criteria > AC-39: the daily series is rendered as a visual bar chart
+⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.
+⚠️ React Router Future Flag Warning: Relative route resolution within Splat routes is changing in v7. You can use the `v7_relativeSplatPath` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_relativesplatpath.
+
+ ✓ src/test/analyticsPage.test.tsx (2 tests) 430ms
+   ✓ AnalyticsPage — client-only acceptance criteria > AC-39: the daily series is rendered as a visual bar chart 310ms
+ ✓ src/test/postEditor.test.tsx (6 tests) 2142ms
+   ✓ PostEditorPage — client-only acceptance criteria > AC-2: the body textarea is bound to state and persisted as `content` 946ms
+   ✓ PostEditorPage — client-only acceptance criteria > AC-4: the Live Markdown Preview tab renders the in-editor title and body 452ms
+
+ Test Files  4 passed (4)
+      Tests  19 passed (19)
+   Start at  22:22:19
+   Duration  3.99s (transform 642ms, setup 674ms, collect 1.89s, tests 3.44s, environment 3.25s, prepare 354ms)
+
+EXIT=0

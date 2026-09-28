@@ -1,0 +1,114 @@
+{
+  "project_type": "rhino",
+  "backend_stack": "rhino-rails",
+  "client_stack": "rhino-react",
+  "rhino_runtime": "v4",
+  "ruby_version": "3.3",
+  "node_version": "20.x",
+  "models": [
+    { "name": "User", "file": "server/app/models/user.rb", "table": "users", "provided_by": "rhino_project_core", "notes": "Extra: add first_name, last_name, approved, profile_completed" },
+    { "name": "Organization", "file": "server/app/models/organization.rb", "table": "organizations", "provided_by": "rhino_project_organizations" },
+    { "name": "Role", "file": "server/app/models/role.rb", "table": "roles", "provided_by": "rhino_project_organizations" },
+    { "name": "UsersRole", "file": "server/app/models/users_role.rb", "table": "users_roles", "provided_by": "rhino_project_organizations" },
+    { "name": "Post", "file": "server/app/models/post.rb", "table": "posts", "blueprint": "server/.rhino/blueprints/posts.yaml" },
+    { "name": "Video", "file": "server/app/models/video.rb", "table": "videos", "blueprint": "server/.rhino/blueprints/videos.yaml" },
+    { "name": "AnalyticsData", "file": "server/app/models/analytics_data.rb", "table": "analytics_data", "blueprint": "server/.rhino/blueprints/analytics_data.yaml" },
+    { "name": "Integration", "file": "server/app/models/integration.rb", "table": "integrations", "blueprint": "server/.rhino/blueprints/integrations.yaml" },
+    { "name": "ApiToken", "file": "server/app/models/api_token.rb", "table": "api_tokens", "blueprint": "server/.rhino/blueprints/api_tokens.yaml" },
+    { "name": "Webhook", "file": "server/app/models/webhook.rb", "table": "webhooks", "blueprint": "server/.rhino/blueprints/webhooks.yaml" },
+    { "name": "SystemSetting", "file": "server/app/models/system_setting.rb", "table": "system_settings", "blueprint": "server/.rhino/blueprints/system_settings.yaml" },
+    { "name": "SystemReport", "file": "server/app/models/system_report.rb", "table": "system_reports", "blueprint": "server/.rhino/blueprints/system_reports.yaml" },
+    { "name": "RolePermission", "file": "server/app/models/role_permission.rb", "table": "role_permissions", "blueprint": "server/.rhino/blueprints/role_permissions.yaml" }
+  ],
+  "blueprints": [
+    "server/.rhino/blueprints/_roles.yaml",
+    "server/.rhino/blueprints/posts.yaml",
+    "server/.rhino/blueprints/videos.yaml",
+    "server/.rhino/blueprints/analytics_data.yaml",
+    "server/.rhino/blueprints/integrations.yaml",
+    "server/.rhino/blueprints/api_tokens.yaml",
+    "server/.rhino/blueprints/webhooks.yaml",
+    "server/.rhino/blueprints/system_settings.yaml",
+    "server/.rhino/blueprints/system_reports.yaml",
+    "server/.rhino/blueprints/role_permissions.yaml"
+  ],
+  "controllers": [
+    { "name": "AnalyticsController", "file": "server/app/controllers/api/analytics_controller.rb", "notes": "Extra: GET /api/{organization}/analytics/summary" },
+    { "name": "SystemController", "file": "server/app/controllers/api/system_controller.rb", "notes": "Extra: GET /api/{organization}/system/health, POST /api/{organization}/system/restore" },
+    { "name": "WebhooksController", "file": "server/app/controllers/api/webhooks_controller.rb", "notes": "Extra: POST /api/{organization}/webhooks/{id}/ping" }
+  ],
+  "policies": [
+    "server/app/policies/post_policy.rb",
+    "server/app/policies/video_policy.rb",
+    "server/app/policies/analytics_data_policy.rb",
+    "server/app/policies/integration_policy.rb",
+    "server/app/policies/api_token_policy.rb",
+    "server/app/policies/webhook_policy.rb",
+    "server/app/policies/system_setting_policy.rb",
+    "server/app/policies/system_report_policy.rb",
+    "server/app/policies/role_permission_policy.rb",
+    "server/app/policies/user_policy.rb"
+  ],
+  "jobs": [
+    { "name": "BackupJob", "file": "server/app/jobs/backup_job.rb", "notes": "Extra: daily backup" }
+  ],
+  "frontend_routes": [
+    { "path": "/", "component": "client/src/components/dashboard/DashboardPage.tsx", "auth": "authenticated", "roles": ["content_manager", "editor", "contributor"] },
+    { "path": "/login", "component": "client/src/components/auth/LoginPage.tsx", "auth": "public", "roles": [] },
+    { "path": "/create-post", "component": "client/src/components/posts/PostEditorPage.tsx", "auth": "authenticated", "roles": ["content_manager", "editor"] },
+    { "path": "/create-post/:postId", "component": "client/src/components/posts/PostEditorPage.tsx", "auth": "authenticated", "roles": ["content_manager", "editor"] },
+    { "path": "/media-library", "component": "client/src/components/media/MediaLibraryPage.tsx", "auth": "authenticated", "roles": ["content_manager", "editor"] },
+    { "path": "/analytics", "component": "client/src/components/analytics/AnalyticsPage.tsx", "auth": "authenticated", "roles": ["content_manager", "editor"] },
+    { "path": "/admin", "component": "client/src/components/admin/AdminOverviewPage.tsx", "auth": "authenticated", "roles": ["admin"] },
+    { "path": "/admin/users", "component": "client/src/components/admin/AdminUsersPage.tsx", "auth": "authenticated", "roles": ["admin"] },
+    { "path": "/admin/api-integrations", "component": "client/src/components/admin/AdminIntegrationsPage.tsx", "auth": "authenticated", "roles": ["admin"] },
+    { "path": "/admin/system-settings", "component": "client/src/components/admin/AdminSystemSettingsPage.tsx", "auth": "authenticated", "roles": ["admin"] },
+    { "path": "/admin/system-reports", "component": "client/src/components/admin/AdminSystemReportsPage.tsx", "auth": "authenticated", "roles": ["admin"] }
+  ],
+  "frontend_components": [
+    "client/src/routes/custom.jsx",
+    "client/src/contexts/AppOwnerProvider.jsx",
+    "client/src/components/layout/AppLayout.tsx",
+    "client/src/components/shared/StatCard.tsx",
+    "client/src/components/shared/ContentStatusBadge.tsx",
+    "client/src/components/shared/VideoPlayerModal.tsx"
+  ],
+  "migrations": [
+    "server/db/migrate/*_create_posts.rb",
+    "server/db/migrate/*_create_videos.rb",
+    "server/db/migrate/*_create_analytics_data.rb",
+    "server/db/migrate/*_create_integrations.rb",
+    "server/db/migrate/*_create_api_tokens.rb",
+    "server/db/migrate/*_create_webhooks.rb",
+    "server/db/migrate/*_create_system_settings.rb",
+    "server/db/migrate/*_create_system_reports.rb",
+    "server/db/migrate/*_create_role_permissions.rb",
+    "server/db/migrate/*_add_profile_fields_to_users.rb"
+  ],
+  "tests": [
+    "server/test/models/post_test.rb",
+    "server/test/models/video_test.rb",
+    "server/test/integration/posts_test.rb",
+    "server/test/integration/posts_policy_test.rb",
+    "server/test/integration/videos_test.rb",
+    "server/test/integration/videos_policy_test.rb",
+    "server/test/integration/analytics_test.rb",
+    "server/test/integration/analytics_data_test.rb",
+    "server/test/integration/system_test.rb",
+    "server/test/integration/system_settings_test.rb",
+    "server/test/integration/invitations_test.rb",
+    "server/test/integration/auth_test.rb",
+    "server/test/integration/rbac_test.rb",
+    "server/test/integration/seeds_test.rb",
+    "server/test/jobs/backup_job_test.rb"
+  ],
+  "key_config_files": [
+    "server/config/initializers/rhino.rb",
+    "server/config/routes.rb",
+    "server/db/seeds.rb",
+    "client/src/routes/custom.jsx",
+    "client/src/lib/api.ts"
+  ],
+  "design_root": ".codalio/ui-prototype",
+  "updated_at": "2026-09-28T16:50:00Z"
+}

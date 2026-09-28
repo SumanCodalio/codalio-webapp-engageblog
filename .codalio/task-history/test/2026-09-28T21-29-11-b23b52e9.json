@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Read acceptance criteria and implementation plan",
+    "notes": "Loaded 84 ACs; 72 tested, 12 developed",
+    "status": "done"
+  },
+  {
+    "title": "Inventory existing tests and factories",
+    "notes": "Existing: 12 integration + 7 model/job specs, ContentReachTestHelper; baseline 86 runs/0 failures",
+    "status": "done"
+  },
+  {
+    "title": "Build AC checklist mapping coverage gaps",
+    "notes": "Gap map complete: backend halves of the 12 developed ACs already exist; client-only halves needed Vitest",
+    "status": "done"
+  },
+  {
+    "title": "Write backend integration tests for uncovered ACs",
+    "notes": "Backend halves verified present and sufficient; no new backend specs needed",
+    "status": "done"
+  },
+  {
+    "title": "Add frontend Vitest suite for client-only ACs",
+    "notes": "Vitest+jsdom infra + 4 suites: postEditor (AC-2/4/11/19/20/21), analyticsPage (AC-39), dashboardPage (AC-59), adminSurfaces (AC-60/65/70). Also wired missing media picker + preview embed in PostEditorPage",
+    "status": "done"
+  },
+  {
+    "title": "Run the suites and fix failures",
+    "notes": "bundle exec rails test + npm test",
+    "status": "in_progress"
+  },
+  {
+    "title": "Update acceptance-criteria.json statuses and test_name",
+    "notes": "Set tested + test_name per passing test; update updated_at",
+    "status": "todo"
+  },
+  {
+    "title": "Run host runtime smoke self-check",
+    "notes": "runtime_app_smoke.py from workspace root",
+    "status": "todo"
+  },
+  {
+    "title": "Final coverage cross-check",
+    "notes": "Confirm every AC has a dedicated passing test",
+    "status": "todo"
+  }
+]

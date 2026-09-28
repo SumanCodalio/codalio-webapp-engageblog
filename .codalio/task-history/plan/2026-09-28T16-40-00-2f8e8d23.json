@@ -1,0 +1,27 @@
+[
+  {
+    "title": "PRD integrity audit \u2192 write .codalio/prd-integrity-report.json",
+    "notes": "17 gaps (7 high, 8 medium, 2 low); role_registry = admin, content_manager, editor, contributor",
+    "status": "done"
+  },
+  {
+    "title": "Design data model + write blueprints (_roles.yaml + model YAMLs)",
+    "notes": "9 model blueprints + _roles.yaml written and YAML-validated",
+    "status": "done"
+  },
+  {
+    "title": "Design permissions + identify Extras",
+    "notes": "Per-role permissions in blueprints; 14 Extras documented in plan",
+    "status": "done"
+  },
+  {
+    "title": "Design screens + write ui-handoff.json",
+    "notes": "10 prototype pages with data + action contracts; routing_scheme flat",
+    "status": "done"
+  },
+  {
+    "title": "Write acceptance-criteria.json + .rhino-plan.md + index.json",
+    "notes": "84 ACs (58 PRD + 12 gap + 14 Extra); plan map covers all 84; index written",
+    "status": "done"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Read acceptance criteria and implementation plan",
+    "notes": "Loaded 84 ACs; 72 tested, 12 developed",
+    "status": "done"
+  },
+  {
+    "title": "Inventory existing tests and factories",
+    "notes": "Existing: 12 integration + 7 model/job specs, ContentReachTestHelper; baseline 86 runs/0 failures",
+    "status": "done"
+  },
+  {
+    "title": "Build AC checklist mapping coverage gaps",
+    "notes": "Gap map complete: backend halves of the 12 developed ACs already exist; client-only halves needed Vitest",
+    "status": "done"
+  },
+  {
+    "title": "Write backend integration tests for uncovered ACs",
+    "notes": "Backend halves verified present and sufficient; no new backend specs needed",
+    "status": "done"
+  },
+  {
+    "title": "Add frontend Vitest suite for client-only ACs",
+    "notes": "Vitest+jsdom infra + 4 suites: postEditor (AC-2/4/11/19/20/21), analyticsPage (AC-39), dashboardPage (AC-59), adminSurfaces (AC-60/65/70). Also wired missing media picker + preview embed in PostEditorPage",
+    "status": "done"
+  },
+  {
+    "title": "Run the suites and fix failures",
+    "notes": "Backend 202 runs/744 assertions/0 failures; frontend 19 tests pass; build exit 0. Fixed 6 backend failures: Post include=videos serialization, User tenant scoping, invitation admin gate + Pundit rescue, Rhino::AuditLog constant, AC-60 users exclusion, seed profile fields",
+    "status": "done"
+  },
+  {
+    "title": "Update acceptance-criteria.json statuses and test_name",
+    "notes": "All 84 ACs now status=tested with a test_name; every name verified to resolve to a real declared test (backend Minitest or frontend Vitest)",
+    "status": "done"
+  },
+  {
+    "title": "Run host runtime smoke self-check",
+    "notes": "runtime_app_smoke.py exited 0 with {\"status\": \"passed\", \"failures\": []}",
+    "status": "done"
+  },
+  {
+    "title": "Final coverage cross-check",
+    "notes": "84/84 ACs tested, 0 missing test_name, all names resolve; backend 202 runs/0 failures, frontend 19/19, smoke passed",
+    "status": "done"
+  }
+]

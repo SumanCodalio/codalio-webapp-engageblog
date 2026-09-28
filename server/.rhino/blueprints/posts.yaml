@@ -1,0 +1,113 @@
+model: Post
+slug: posts
+table: posts
+
+options:
+  belongs_to_organization: true
+  soft_deletes: true
+  audit_trail: true
+  pagination: true
+  per_page: 25
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  user_id:
+    type: foreignId
+    foreign_model: User
+    nullable: false
+    index: true
+  title:
+    type: string
+    nullable: false
+    filterable: true
+    sortable: true
+    searchable: true
+  slug:
+    type: string
+    nullable: true
+    filterable: true
+    sortable: true
+    searchable: true
+  content:
+    type: text
+    nullable: true
+    searchable: true
+  category:
+    type: string
+    nullable: true
+    filterable: true
+    sortable: true
+    searchable: true
+  tags:
+    type: json
+    nullable: true
+  status:
+    type: string
+    nullable: false
+    default: "draft"
+    filterable: true
+    sortable: true
+  read_time_minutes:
+    type: integer
+    nullable: true
+    sortable: true
+  view_count:
+    type: integer
+    nullable: false
+    default: 0
+    sortable: true
+  published_at:
+    type: datetime
+    nullable: true
+    filterable: true
+    sortable: true
+  scheduled_at:
+    type: datetime
+    nullable: true
+    filterable: true
+    sortable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+  - type: belongsTo
+    model: User
+  - type: hasMany
+    model: Video
+  - type: hasMany
+    model: AnalyticsData
+
+permissions:
+  admin:
+    actions: [index, show, store, update, destroy, trashed, restore, forceDelete]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: [index, show, store, update, destroy, trashed, restore]
+    show_fields: "*"
+    create_fields: &post_writable
+      - title
+      - slug
+      - content
+      - category
+      - tags
+      - status
+      - read_time_minutes
+      - published_at
+      - scheduled_at
+    update_fields: *post_writable
+  editor:
+    actions: [index, show, store, update]
+    show_fields: "*"
+    create_fields: *post_writable
+    update_fields: *post_writable
+  contributor:
+    actions: [index, show]
+    show_fields: [id, title, slug, category, status, read_time_minutes, view_count, published_at, scheduled_at, created_at, updated_at]
+    create_fields: []
+    update_fields: []

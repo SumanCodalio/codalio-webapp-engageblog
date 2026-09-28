@@ -1,0 +1,57 @@
+model: Webhook
+slug: webhooks
+table: webhooks
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: true
+  pagination: true
+  per_page: 25
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  url:
+    type: string
+    nullable: false
+    filterable: true
+    searchable: true
+  events:
+    type: json
+    nullable: true
+  status:
+    type: string
+    nullable: false
+    default: "pending"
+    filterable: true
+    sortable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+
+permissions:
+  admin:
+    actions: [index, show, store, update, destroy]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
+  editor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
+  contributor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []

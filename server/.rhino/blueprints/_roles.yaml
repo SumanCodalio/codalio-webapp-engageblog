@@ -1,0 +1,13 @@
+roles:
+  admin:
+    name: Admin
+    description: "Privileged administrator. Full access to all features and data, including the /admin route group (users, integrations, system settings, reports)."
+  content_manager:
+    name: Content Manager
+    description: "Content team lead. Creates, edits, publishes and deletes posts and media; views analytics. Canonical id for the PRD's 'content_team_member'."
+  editor:
+    name: Editor
+    description: "Content team member. Creates and edits posts and media, views analytics. Cannot delete or manage privileged capabilities (4K upload, API keys, security config)."
+  contributor:
+    name: Contributor
+    description: "Read-only content team member. Can view posts and media but cannot create, edit or delete (draft-only tier)."

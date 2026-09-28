@@ -1,0 +1,1139 @@
+{
+  "criteria": [
+    {
+      "id": "AC-1",
+      "name": "Only content_team_member can access /create-post.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-1:_a_content_manager_can_create_a_post",
+      "subtasks": [
+        "Add `server/app/policies/post_policy.rb` with `create?`/`update?` gated on `has_role?(user, 'content_manager') || has_role?(user, 'editor')`",
+        "Register the route in `client/src/routes/custom.jsx` inside the authenticated guard and gate with `useUserRole().hasRole('content_manager') || hasRole('editor')`",
+        "Add `server/test/integration/posts_policy_test.rb` asserting 403 for contributor and 201 for content_manager",
+        "Develop: PostPolicy create? + posts API 403 for contributor"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "name": "User can enter and format text content using a rich text editor.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-2: the body textarea is bound to state and persisted as `content` (backend: PostEditingApiTest#test_AC-2:_formatted_body_content_round-trips_through_the_content_field)",
+      "subtasks": [
+        "Build `client/src/components/posts/PostEditorPage.tsx` from `.codalio/ui-prototype/files/pages/CreatePost.tsx` (textarea + markdown preview tabs)",
+        "Bind the body textarea to local state and persist via `useModelStore('posts')` payload key `content`",
+        "Develop: PostEditorPage textarea + markdown preview tab wired to useModelStore content"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "name": "User can save a post as a draft.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-3:_an_invalid_payload_is_rejected_with_a_structured_422",
+      "subtasks": [
+        "Wire the Save Draft button in `client/src/components/posts/PostEditorPage.tsx` to `useModelStore('posts')` with `{ status: 'draft' }`",
+        "Add `server/app/models/post.rb` validation allowing `status` in `%w[draft published scheduled]`",
+        "Develop: Save Draft -> status=draft; PostStoreRequest validation"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "name": "User can preview the post before publishing.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-4: the Live Markdown Preview tab renders the in-editor title and body (backend: PostEditingApiTest#test_AC-4:_a_show_request_returns_the_title,_content_and_category_the_preview_renders)",
+      "subtasks": [
+        "Wire the 'Live Markdown Preview' tab in `client/src/components/posts/PostEditorPage.tsx` to render the in-editor `title`/`content` state (no backend op)",
+        "Develop: PostEditorPage Live Markdown Preview tab renders in-editor state"
+      ]
+    },
+    {
+      "id": "AC-5",
+      "name": "User can publish the post, making it live.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-5:_publishing_a_post_sets_published_at",
+      "subtasks": [
+        "Add a `before_save` callback in `server/app/models/post.rb` setting `published_at = Time.current` when `status` becomes `published` and `published_at` is blank",
+        "Wire the Publish Post button in `client/src/components/posts/PostEditorPage.tsx` to `useModelUpdate('posts')` with `{ status: 'published' }`",
+        "Develop: Post before_save publish transition"
+      ]
+    },
+    {
+      "id": "AC-6",
+      "name": "Published posts are visible on the blog.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-6:_an_authenticated_member_lists_tenant-scoped_posts",
+      "subtasks": [
+        "Add `rhino_filters :status` to `server/app/models/post.rb` and query `useModelIndex('posts', { filters: { status: 'published' } })` in `client/src/components/dashboard/DashboardPage.tsx`",
+        "Develop: Published posts visible via posts index"
+      ]
+    },
+    {
+      "id": "AC-7",
+      "name": "The data model stores approved and the application uses it as described in this story.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "UserTest#test_AC-7/AC-8:_approved_and_profile_completed_default_to_false",
+      "subtasks": [
+        "Add `server/db/migrate/*_add_profile_fields_to_users.rb` adding `approved` boolean default false to `users`",
+        "Add `validates :approved, inclusion: { in: [true, false] }` to `server/app/models/user.rb`",
+        "Develop: approved column + default"
+      ]
+    },
+    {
+      "id": "AC-8",
+      "name": "The data model stores profile completed and the application uses it as described in this story.",
+      "user_story": "Create and Publish Text Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "UserTest#test_AC-7/AC-8:_approved_and_profile_completed_default_to_false",
+      "subtasks": [
+        "Add `profile_completed` boolean default false to `server/db/migrate/*_add_profile_fields_to_users.rb`",
+        "Add `validates :profile_completed, inclusion: { in: [true, false] }` to `server/app/models/user.rb`",
+        "Develop: profile_completed column + default"
+      ]
+    },
+    {
+      "id": "AC-9",
+      "name": "Only content_team_member can edit published posts.",
+      "user_story": "Edit Existing Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-9/AC-75:_a_content_manager_cannot_update_another_author's_post",
+      "subtasks": [
+        "Add `update?` to `server/app/policies/post_policy.rb` calling `super` and allowing content_manager/editor",
+        "Add `server/test/integration/posts_policy_test.rb` asserting 403 for contributor on PUT /api/{org}/posts/{id}",
+        "Develop: PostPolicy update? ownership"
+      ]
+    },
+    {
+      "id": "AC-10",
+      "name": "User can select a published post from a list and enter edit mode.",
+      "user_story": "Edit Existing Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-10/AC-12:_an_admin_can_update_any_post",
+      "subtasks": [
+        "Add an edit action in `client/src/components/dashboard/DashboardPage.tsx` navigating to `/create-post/:postId`",
+        "Register `<Route path=\"/create-post/:postId\" element={<PostEditorPage />} />` in `client/src/routes/custom.jsx`",
+        "Develop: Dashboard select -> /create-post/:postId edit route"
+      ]
+    },
+    {
+      "id": "AC-11",
+      "name": "User can modify text and media within the post.",
+      "user_story": "Edit Existing Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-11: edit mode loads the post and saves text changes through useModelUpdate (backend: PostEditingApiTest#test_AC-11:_the_post_can_be_loaded_with_its_media_attached)",
+      "subtasks": [
+        "Load the post with `useModelShow('posts', postId, { includes: ['videos'] })` in `client/src/components/posts/PostEditorPage.tsx`",
+        "Persist edits via `useModelUpdate('posts')` with `{ id, data: { title, content, category, tags } }`",
+        "Develop: PostEditorPage edit mode loads via useModelShow and modifies text + media"
+      ]
+    },
+    {
+      "id": "AC-12",
+      "name": "User can save changes, which are immediately reflected on the live blog.",
+      "user_story": "Edit Existing Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostsApiTest#test_AC-10/AC-12:_an_admin_can_update_any_post",
+      "subtasks": [
+        "Rely on `useModelUpdate('posts')` self-invalidation of the `modelIndex`/`modelShow` caches (no manual invalidation)",
+        "Add `server/test/integration/posts_test.rb` asserting the updated title is returned by GET /api/{org}/posts/{id}",
+        "Develop: useModelUpdate persists changes"
+      ]
+    },
+    {
+      "id": "AC-13",
+      "name": "Only content_team_member can access /media-library.",
+      "user_story": "Upload Video Content",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-13:_a_content_manager_can_upload_a_video",
+      "subtasks": [
+        "Add `server/app/policies/video_policy.rb` gating `index?`/`create?` on content_manager/editor",
+        "Gate the `/media-library` route in `client/src/routes/custom.jsx` with `useUserRole()`",
+        "Develop: VideoPolicy create? + videos API"
+      ]
+    },
+    {
+      "id": "AC-14",
+      "name": "The app provides an upload UI for video data, accepting MP4, MOV, and AVI formats, and visibly confirms a successful import.",
+      "user_story": "Upload Video Content",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-14:_an_invalid_upload_payload_is_rejected_with_422",
+      "subtasks": [
+        "Build the upload dialog in `client/src/components/media/MediaLibraryPage.tsx` from `.codalio/ui-prototype/files/pages/MediaLibrary.tsx`",
+        "Add `validates :format, inclusion: { in: %w[mp4 mov avi webm png jpg webp] }, allow_nil: true` to `server/app/models/video.rb`",
+        "Wire the Start Transcode button to `useModelStore('videos')` and show a success toast on `onSuccess`",
+        "Develop: MP4/MOV/AVI accepted; VideoStoreRequest 422",
+        "Fixed rhino-rails 4.10.0 params_hash stripping the Rails-reserved format param: config/initializers/rhino_format_param_patch.rb restores body-supplied format for models with a format column; regression assertions added to test/integration/videos_api_test.rb"
+      ]
+    },
+    {
+      "id": "AC-15",
+      "name": "User can add a title and description to the uploaded video.",
+      "user_story": "Upload Video Content",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-15:_a_video_title_and_description_can_be_updated",
+      "subtasks": [
+        "Add `title` (required) and `description` columns to `server/.rhino/blueprints/videos.yaml`",
+        "Bind the Asset Inspector title input in `client/src/components/media/MediaLibraryPage.tsx` to `useModelUpdate('videos')`",
+        "Develop: title + description update"
+      ]
+    },
+    {
+      "id": "AC-16",
+      "name": "Uploaded videos are stored in the media library.",
+      "user_story": "Upload Video Content",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-16:_an_authenticated_member_lists_tenant-scoped_videos",
+      "subtasks": [
+        "Query `useModelIndex('videos', { sort: '-created_at' })` in `client/src/components/media/MediaLibraryPage.tsx`",
+        "Add `server/test/integration/videos_test.rb` asserting a created video appears in the index",
+        "Develop: videos stored in library"
+      ]
+    },
+    {
+      "id": "AC-17",
+      "name": "The data model stores duration and the application uses it as described in this story.",
+      "user_story": "Upload Video Content",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-17/AC-18/AC-76:_the_response_exposes_url_and_the_computed_duration",
+      "subtasks": [
+        "Add `duration_seconds` integer column to `server/.rhino/blueprints/videos.yaml`",
+        "Add a `rhino_computed_attributes` `duration` (MM:SS) in `server/app/models/video.rb`",
+        "Develop: duration_seconds column"
+      ]
+    },
+    {
+      "id": "AC-18",
+      "name": "The data model stores url and the application uses it as described in this story.",
+      "user_story": "Upload Video Content",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-17/AC-18/AC-76:_the_response_exposes_url_and_the_computed_duration",
+      "subtasks": [
+        "Add `url` string (required) column to `server/.rhino/blueprints/videos.yaml`",
+        "Render `asset.url` in the Asset Inspector in `client/src/components/media/MediaLibraryPage.tsx`",
+        "Develop: url column"
+      ]
+    },
+    {
+      "id": "AC-19",
+      "name": "Only content_team_member can embed videos.",
+      "user_story": "Embed Video in Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-19/AC-20: the media picker lists library assets and attaches the selected one (backend: PostEditingApiTest#test_AC-19:_a_contributor_cannot_attach_a_video_to_a_post)",
+      "subtasks": [
+        "Add `update?` to `server/app/policies/post_policy.rb` allowing content_manager/editor to set `post_id` on a video",
+        "Add `server/test/integration/videos_policy_test.rb` asserting 403 for contributor on PUT /api/{org}/videos/{id}",
+        "Develop: PostEditorPage media picker lists useModelIndex(videos) and attaches"
+      ]
+    },
+    {
+      "id": "AC-20",
+      "name": "User can select an uploaded video from the media library within the post editor.",
+      "user_story": "Embed Video in Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-19/AC-20: the media picker lists library assets and attaches the selected one (backend: PostEditingApiTest#test_AC-20:_the_media_library_lists_assets_and_one_can_be_attached_to_a_post)",
+      "subtasks": [
+        "Add a media picker in `client/src/components/posts/PostEditorPage.tsx` using `useModelIndex('videos')`",
+        "Wire 'Insert from Media Library' to set the selected video's `post_id` via `useModelUpdate('videos')`",
+        "Develop: PostEditorPage attaches video via useModelUpdate(videos) post_id"
+      ]
+    },
+    {
+      "id": "AC-21",
+      "name": "The selected video is correctly embedded and displayed in the post preview.",
+      "user_story": "Embed Video in Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/postEditor.test.tsx > PostEditorPage — client-only acceptance criteria > AC-21: the attached video is displayed in the post preview (backend: PostEditingApiTest#test_AC-21:_the_attached_video_is_embedded_in_the_post_payload)",
+      "subtasks": [
+        "Render the attached video in the preview tab of `client/src/components/posts/PostEditorPage.tsx` using `VideoPlayerModal`",
+        "Develop: PostEditorPage preview shows embedded video; MediaLibrary VideoPlayerModal plays"
+      ]
+    },
+    {
+      "id": "AC-22",
+      "name": "Embedded videos play correctly on the published blog post.",
+      "user_story": "Embed Video in Post",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideosApiTest#test_AC-22:_a_contributor_cannot_upload_a_video",
+      "subtasks": [
+        "Add `rhino_includes :videos` to `server/app/models/post.rb` and load `useModelShow('posts', id, { includes: ['videos'] })`",
+        "Render the video player in `client/src/components/dashboard/DashboardPage.tsx` post detail",
+        "Develop: VideoPolicy denies contributor"
+      ]
+    },
+    {
+      "id": "AC-23",
+      "name": "Unauthenticated users are redirected to /login when accessing /admin/dashboard.",
+      "user_story": "Admin Login",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthFlowApiTest#test_AC-23:_an_invalid_bearer_token_is_rejected",
+      "subtasks": [
+        "Add an authenticated route guard in `client/src/routes/custom.jsx` redirecting unauthenticated users to `/login`",
+        "Add `server/test/integration/auth_test.rb` asserting 401 without a Bearer token on /api/{org}/posts",
+        "Develop: AuthenticatedRoute redirects to /login"
+      ]
+    },
+    {
+      "id": "AC-24",
+      "name": "User can enter email and password on the login page.",
+      "user_story": "Admin Login",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-24:_valid_credentials_return_a_token_and_the_organization_slug",
+      "subtasks": [
+        "Build `client/src/components/auth/LoginPage.tsx` from `.codalio/ui-prototype/files/pages/Login.tsx` with controlled email/password inputs",
+        "Develop: LoginPage email+password"
+      ]
+    },
+    {
+      "id": "AC-25",
+      "name": "Successful login redirects admin to /admin/dashboard.",
+      "user_story": "Admin Login",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthFlowApiTest#test_AC-25/AC-63:_an_admin_resolves_the_admin_role_after_login",
+      "subtasks": [
+        "Wire `useAuth().login(email, password)` in `client/src/components/auth/LoginPage.tsx` and branch on `result.success`",
+        "Call `setOrganization(result.organization_slug)` then `navigate('/admin')` for the admin role",
+        "Develop: admin -> /admin redirect"
+      ]
+    },
+    {
+      "id": "AC-26",
+      "name": "Failed login attempts display an error message.",
+      "user_story": "Admin Login",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-26:_invalid_credentials_are_rejected",
+      "subtasks": [
+        "Surface `result.error` in the Alert slot of `client/src/components/auth/LoginPage.tsx` (login never throws)",
+        "Develop: LoginPage error alert"
+      ]
+    },
+    {
+      "id": "AC-27",
+      "name": "Only admin can access /admin/users.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-27:_a_content_manager_cannot_administer_users_(write_is_admin-only)",
+      "subtasks": [
+        "Add `server/app/policies/user_policy.rb` gating `index?`/`update?`/`destroy?` on `has_role?(user, 'admin')`",
+        "Gate the `/admin/users` route in `client/src/routes/custom.jsx` with `useUserRole().hasRole('admin')`",
+        "Develop: admin-only user writes"
+      ]
+    },
+    {
+      "id": "AC-28",
+      "name": "Admin can view a list of existing content_team_member accounts.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-27/AC-28:_an_admin_can_list_users",
+      "subtasks": [
+        "Query `useModelIndex('users', { includes: ['users_roles'] })` in `client/src/components/admin/AdminUsersPage.tsx`",
+        "Develop: AdminUsersPage useModelIndex(users)"
+      ]
+    },
+    {
+      "id": "AC-29",
+      "name": "Admin can create a new content_team_member account with a name, email, and password.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-29:_an_admin_can_invite_a_member",
+      "subtasks": [
+        "Wire the Invite Member dialog in `client/src/components/admin/AdminUsersPage.tsx` to `useInviteUser().mutate({ email, role_id })`",
+        "Add `server/test/integration/invitations_test.rb` asserting POST /api/{org}/invitations creates an invitation",
+        "Develop: useInviteUser + InvitationPolicy patch"
+      ]
+    },
+    {
+      "id": "AC-30",
+      "name": "Admin can edit an existing content_team_member's details.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-30/AC-31:_an_admin_can_update_and_deactivate_a_member",
+      "subtasks": [
+        "Wire the Change Role action in `client/src/components/admin/AdminUsersPage.tsx` to `useModelUpdate('users')`",
+        "Develop: useModelUpdate(users)"
+      ]
+    },
+    {
+      "id": "AC-31",
+      "name": "Admin can deactivate or delete a content_team_member account.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-30/AC-31:_an_admin_can_update_and_deactivate_a_member",
+      "subtasks": [
+        "Wire the Toggle Active Status and Revoke Seat actions in `client/src/components/admin/AdminUsersPage.tsx` to `useModelUpdate('users')` / `useModelDelete('users')`",
+        "Develop: deactivate/delete member"
+      ]
+    },
+    {
+      "id": "AC-32",
+      "name": "The data model stores first name and the application uses it as described in this story.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "UserTest#test_AC-32/AC-33:_first_name_and_last_name_are_persisted",
+      "subtasks": [
+        "Add `first_name` string to `server/db/migrate/*_add_profile_fields_to_users.rb`",
+        "Render `user.first_name` in `client/src/components/admin/AdminUsersPage.tsx`",
+        "Develop: first_name column"
+      ]
+    },
+    {
+      "id": "AC-33",
+      "name": "The data model stores last name and the application uses it as described in this story.",
+      "user_story": "Manage Content Team Members",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "UserTest#test_AC-32/AC-33:_first_name_and_last_name_are_persisted",
+      "subtasks": [
+        "Add `last_name` string to `server/db/migrate/*_add_profile_fields_to_users.rb`",
+        "Render `user.last_name` in `client/src/components/admin/AdminUsersPage.tsx`",
+        "Develop: last_name column"
+      ]
+    },
+    {
+      "id": "AC-34",
+      "name": "User can click a logout button.",
+      "user_story": "User Logout",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-34/AC-35:_logout_revokes_the_token",
+      "subtasks": [
+        "Wire the 'Switch User / Log Out' menu item in `client/src/components/layout/AppLayout.tsx` to `useAuth().logout()`",
+        "Develop: AppLayout logout button"
+      ]
+    },
+    {
+      "id": "AC-35",
+      "name": "Successful logout redirects the user to /login.",
+      "user_story": "User Logout",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-34/AC-35:_logout_revokes_the_token",
+      "subtasks": [
+        "Configure `onUnauthorized` in `client/src/lib/api.ts` to navigate to `/login`; `logout()` clears token/org/route_group",
+        "Develop: logout redirects to /login"
+      ]
+    },
+    {
+      "id": "AC-36",
+      "name": "After logout, the user cannot access protected routes without re-authenticating.",
+      "user_story": "User Logout",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-36:_protected_routes_reject_an_unauthenticated_request",
+      "subtasks": [
+        "Add `server/test/integration/auth_test.rb` asserting the old token returns 401 after POST /api/auth/logout",
+        "Ensure the authenticated guard in `client/src/routes/custom.jsx` reads `isAuthenticated`",
+        "Develop: AuthenticatedRoute guard"
+      ]
+    },
+    {
+      "id": "AC-37",
+      "name": "Only content_team_member can access /analytics.",
+      "user_story": "View Content Performance Metrics",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-37:_a_contributor_may_read_the_analytics_summary",
+      "subtasks": [
+        "Add `server/app/policies/analytics_data_policy.rb` gating `index?` on content_manager/editor",
+        "Gate the `/analytics` route in `client/src/routes/custom.jsx` with `useUserRole()`",
+        "Develop: analytics_data policy"
+      ]
+    },
+    {
+      "id": "AC-38",
+      "name": "Dashboard displays total views, unique visitors, and engagement rate for all content.",
+      "user_story": "View Content Performance Metrics",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-38/AC-68:_the_summary_returns_the_dashboard_aggregate_keys",
+      "subtasks": [
+        "Add `server/app/controllers/api/analytics_controller.rb` returning `total_impressions`, `unique_readers`, `engagement_rate` via `Rhino.query(AnalyticsData)`",
+        "Render the four StatCards in `client/src/components/analytics/AnalyticsPage.tsx` from `api.get('/analytics/summary')`",
+        "Develop: totals from /analytics/summary"
+      ]
+    },
+    {
+      "id": "AC-39",
+      "name": "Metrics are presented in an easy-to-understand visual format (e.g., charts, graphs).",
+      "user_story": "View Content Performance Metrics",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "client/src/test/analyticsPage.test.tsx > AnalyticsPage — client-only acceptance criteria > AC-39: the daily series is rendered as a visual bar chart",
+      "subtasks": [
+        "Render the daily bar chart in `client/src/components/analytics/AnalyticsPage.tsx` from `daily_series` (plain divs, no chart lib required)",
+        "Develop: AnalyticsPage bar chart from daily_series"
+      ]
+    },
+    {
+      "id": "AC-40",
+      "name": "User can see performance metrics for individual posts.",
+      "user_story": "View Content Performance Metrics",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-40:_the_leaderboard_carries_per-post_metrics",
+      "subtasks": [
+        "Return a `leaderboard[]` array (title, category, has_video, views, watch_time, completion, shares) from `server/app/controllers/api/analytics_controller.rb`",
+        "Render the leaderboard table in `client/src/components/analytics/AnalyticsPage.tsx`",
+        "Develop: per-post leaderboard"
+      ]
+    },
+    {
+      "id": "AC-41",
+      "name": "Only content_team_member can filter analytics data.",
+      "user_story": "Filter Analytics Data",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-41/AC-42:_the_range_and_content_type_filters_are_accepted",
+      "subtasks": [
+        "Gate the `range`/`content_type` params in `server/app/controllers/api/analytics_controller.rb` behind the same `analytics_data.index` policy check",
+        "Develop: date range filter"
+      ]
+    },
+    {
+      "id": "AC-42",
+      "name": "User can select a custom date range to view data.",
+      "user_story": "Filter Analytics Data",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-41/AC-42:_the_range_and_content_type_filters_are_accepted",
+      "subtasks": [
+        "Wire the date-range Select in `client/src/components/analytics/AnalyticsPage.tsx` to the `range` query param of `api.get('/analytics/summary')`",
+        "Develop: content type filter"
+      ]
+    },
+    {
+      "id": "AC-43",
+      "name": "User can filter data to show only video posts or text posts.",
+      "user_story": "Filter Analytics Data",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-43/AC-44:_the_daily_series_reflects_the_requested_window",
+      "subtasks": [
+        "Wire the content-type Select in `client/src/components/analytics/AnalyticsPage.tsx` to the `content_type` param; filter on `Post#has_video` in the controller",
+        "Develop: reactive refetch"
+      ]
+    },
+    {
+      "id": "AC-44",
+      "name": "Filtered data updates the dashboard in real-time.",
+      "user_story": "Filter Analytics Data",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-43/AC-44:_the_daily_series_reflects_the_requested_window",
+      "subtasks": [
+        "Include `range`/`content_type` in the `useQuery` key in `client/src/components/analytics/AnalyticsPage.tsx` so changing a filter refetches",
+        "Develop: event_type filter"
+      ]
+    },
+    {
+      "id": "AC-45",
+      "name": "The data model stores event type and the application uses it as described in this story.",
+      "user_story": "Filter Analytics Data",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsDataTest#test_AC-45:_event_type_is_stored_and_required",
+      "subtasks": [
+        "Add `event_type` string (required) to `server/.rhino/blueprints/analytics_data.yaml`",
+        "Add `rhino_filters :event_type` to `server/app/models/analytics_data.rb`",
+        "Develop: event_type column"
+      ]
+    },
+    {
+      "id": "AC-46",
+      "name": "Only admin can access /admin/integrations.",
+      "user_story": "Connect to Marketing Tools",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-46/AC-47:_an_admin_can_list_and_configure_integrations",
+      "subtasks": [
+        "Add `server/app/policies/integration_policy.rb` gating all actions on `has_role?(user, 'admin')`",
+        "Gate the `/admin/api-integrations` route in `client/src/routes/custom.jsx` with `useUserRole().hasRole('admin')`",
+        "Develop: admin-only integrations"
+      ]
+    },
+    {
+      "id": "AC-47",
+      "name": "Admin can view a list of available marketing tool integrations (e.g., Mailchimp, HubSpot).",
+      "user_story": "Connect to Marketing Tools",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-46/AC-47:_an_admin_can_list_and_configure_integrations",
+      "subtasks": [
+        "Query `useModelIndex('integrations')` in `client/src/components/admin/AdminIntegrationsPage.tsx`",
+        "Seed the six platforms (YouTube, Vimeo, GA4, HubSpot, LinkedIn, Zapier) in `server/db/seeds.rb`",
+        "Develop: configure keys"
+      ]
+    },
+    {
+      "id": "AC-48",
+      "name": "Admin can configure API keys or authentication tokens for selected integrations.",
+      "user_story": "Connect to Marketing Tools",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-48:_a_content_manager_cannot_configure_integrations",
+      "subtasks": [
+        "Wire the Configure dialog in `client/src/components/admin/AdminIntegrationsPage.tsx` to `useModelUpdate('integrations')` with `{ client_id, api_key, auto_sync }`",
+        "Develop: status indicator"
+      ]
+    },
+    {
+      "id": "AC-49",
+      "name": "Successful integration is confirmed with a status indicator.",
+      "user_story": "Connect to Marketing Tools",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-49/AC-50/AC-51/AC-52/AC-79:_the_system_health_endpoint_returns_the_four_tiles",
+      "subtasks": [
+        "Render the Connected/Not Linked badge in `client/src/components/admin/AdminIntegrationsPage.tsx` from `integration.connected`",
+        "Wire the platform Switch to `useModelUpdate('integrations')` with `{ connected }`",
+        "Develop: health alerts"
+      ]
+    },
+    {
+      "id": "AC-50",
+      "name": "System generates alerts for critical errors (e.g., server downtime, database connection issues).",
+      "user_story": "System Health Monitoring",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-49/AC-50/AC-51/AC-52/AC-79:_the_system_health_endpoint_returns_the_four_tiles",
+      "subtasks": [
+        "Add `server/app/jobs/backup_job.rb` (or a health-check job) that raises/logs an alert when the DB ping fails",
+        "Add `server/test/jobs/health_check_job_test.rb` asserting an alert record is created on failure",
+        "Develop: perf metrics"
+      ]
+    },
+    {
+      "id": "AC-51",
+      "name": "System logs application performance metrics (e.g., response times, resource utilization).",
+      "user_story": "System Health Monitoring",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-49/AC-50/AC-51/AC-52/AC-79:_the_system_health_endpoint_returns_the_four_tiles",
+      "subtasks": [
+        "Add `server/app/controllers/api/system_controller.rb` returning `api_gateway`, `db_replica`, `video_storage`, `security_perimeter` status objects",
+        "Add `server/test/integration/system_test.rb` asserting GET /api/{org}/system/health returns those keys",
+        "Develop: health dashboard"
+      ]
+    },
+    {
+      "id": "AC-52",
+      "name": "Monitoring data is accessible to admin via a dedicated dashboard (e.g., /admin/monitoring).",
+      "user_story": "System Health Monitoring",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-52:_a_content_manager_cannot_read_system_health",
+      "subtasks": [
+        "Build `client/src/components/admin/AdminSystemReportsPage.tsx` rendering the health panel from `api.get('/system/health')`",
+        "Register `<Route path=\"/admin/system-reports\" element={<AdminSystemReportsPage />} />` in `client/src/routes/custom.jsx` gated to admin",
+        "Develop: admin-only health"
+      ]
+    },
+    {
+      "id": "AC-53",
+      "name": "System performs automated daily backups of all application data.",
+      "user_story": "Data Backup and Restore",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "BackupJobTest#test_AC-53:_a_second_run_records_a_fresh_backup_snapshot",
+      "subtasks": [
+        "Add `server/app/jobs/backup_job.rb` and schedule it daily in `server/config/recurring.yml`",
+        "Add `server/test/jobs/backup_job_test.rb` asserting a backup record is created",
+        "Develop: BackupJob daily"
+      ]
+    },
+    {
+      "id": "AC-54",
+      "name": "Backup files are stored securely and redundantly.",
+      "user_story": "Data Backup and Restore",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "BackupJobTest#test_AC-54:_the_backup_record_carries_a_summary_of_the_tenant_data_volume",
+      "subtasks": [
+        "Persist backup metadata to `server/app/models/system_report.rb` with `report_type: 'backup'` and a `summary` json payload",
+        "Develop: BackupJob writes backup SystemReport rows per org"
+      ]
+    },
+    {
+      "id": "AC-55",
+      "name": "admin can initiate a data restore process from a recent backup.",
+      "user_story": "Data Backup and Restore",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-55/AC-80:_an_admin_can_trigger_a_restore_from_the_most_recent_backup",
+      "subtasks": [
+        "Add `POST /api/{organization}/system/restore` to `server/app/controllers/api/system_controller.rb` (admin-only, uses `Rhino.query`)",
+        "Wire a Restore button in `client/src/components/admin/AdminSystemReportsPage.tsx` to `api.post('/system/restore')`",
+        "Develop: restore endpoint"
+      ]
+    },
+    {
+      "id": "AC-56",
+      "name": "content_team_member cannot access /admin routes.",
+      "user_story": "Role-Based Access Control",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-56/AC-81:_a_content_manager_is_denied_every_admin_resource",
+      "subtasks": [
+        "Add per-model policies in `server/app/policies/*_policy.rb` denying content_manager/editor/contributor on admin resources",
+        "Add `server/test/integration/rbac_test.rb` asserting 403 for content_manager on GET /api/{org}/integrations",
+        "Develop: content team denied /admin"
+      ]
+    },
+    {
+      "id": "AC-57",
+      "name": "admin has full access to all application features and data.",
+      "user_story": "Role-Based Access Control",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-57:_an_admin_has_full_access_to_admin_resources",
+      "subtasks": [
+        "Grant `actions: [index, show, store, update, destroy]` with `show_fields: '*'` to admin in every blueprint under `server/.rhino/blueprints/`",
+        "Add `server/test/integration/rbac_test.rb` asserting 200 for admin on every admin resource index",
+        "Develop: admin full access"
+      ]
+    },
+    {
+      "id": "AC-58",
+      "name": "Unauthorized access attempts are logged and blocked.",
+      "user_story": "Role-Based Access Control",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-58:_an_editor_is_denied_admin_resources",
+      "subtasks": [
+        "Add `include Rhino::HasAuditTrail` to the admin models in `server/.rhino/blueprints/*.yaml` so denied/attempted writes are recorded",
+        "Add `server/test/integration/rbac_test.rb` asserting the 403 body message is present",
+        "Develop: unauthorized blocked"
+      ]
+    },
+    {
+      "id": "AC-59",
+      "name": "The dashboard at / renders reach metrics (total reach, video watch hours, read completion, published stories) and a recent-posts list with status, category, view count and video indicator.",
+      "user_story": "Gap compensation: Dashboard (SITEMAP_PAGE_NO_AC)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/dashboardPage.test.tsx > DashboardPage — client-only acceptance criteria > AC-59: the four reach metric cards are rendered from the analytics summary",
+      "subtasks": [
+        "Build `client/src/components/dashboard/DashboardPage.tsx` from `.codalio/ui-prototype/files/pages/Landing.tsx`",
+        "Register `<Route path=\"/\" element={<DashboardPage />} />` in `client/src/routes/custom.jsx` inside `AppOwnerProvider` + `Layout`",
+        "Load `useModelIndex('posts', { includes: ['videos'], sort: '-published_at' })` and render the metrics + table",
+        "Develop: DashboardPage renders reach metrics + recent content"
+      ],
+      "compensated_from_gap": "SITEMAP_PAGE_NO_AC"
+    },
+    {
+      "id": "AC-60",
+      "name": "The admin overview at /admin lists the four admin modules (users, integrations, system settings, system reports) and shows infrastructure health, and is reachable only by admin.",
+      "user_story": "Gap compensation: Admin overview (SITEMAP_PAGE_NO_AC)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "client/src/test/adminSurfaces.test.tsx > AdminOverviewPage — client-only acceptance criteria > AC-60: the overview lists the four admin modules (backend: AdminSurfacesApiTest#test_AC-60:_every_admin_module_resource_is_reachable_by_admin)",
+      "subtasks": [
+        "Build `client/src/components/admin/AdminOverviewPage.tsx` from `.codalio/ui-prototype/files/pages/Admin.tsx`",
+        "Register `<Route path=\"/admin\" element={<AdminOverviewPage />} />` in `client/src/routes/custom.jsx` gated to admin",
+        "Develop: AdminOverviewPage lists four modules + health"
+      ],
+      "compensated_from_gap": "SITEMAP_PAGE_NO_AC"
+    },
+    {
+      "id": "AC-61",
+      "name": "An admin can view and update organization identity, video encoding presets, and security/SSO settings at /admin/system-settings.",
+      "user_story": "Gap compensation: System settings (SITEMAP_PAGE_NO_AC)",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-61:_an_admin_can_update_system_settings",
+      "subtasks": [
+        "Build `client/src/components/admin/AdminSystemSettingsPage.tsx` from `.codalio/ui-prototype/files/pages/AdminSystemSettings.tsx`",
+        "Wire the three Save buttons to `useModelUpdate('system_settings')` with the form fields",
+        "Add `server/test/integration/system_settings_test.rb` asserting 403 for content_manager and 200 for admin",
+        "Develop: system settings update"
+      ],
+      "compensated_from_gap": "SITEMAP_PAGE_NO_AC"
+    },
+    {
+      "id": "AC-62",
+      "name": "An admin can view live system health, generate a report, and view the report archive at /admin/system-reports.",
+      "user_story": "Gap compensation: System reports (SITEMAP_PAGE_NO_AC)",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-62:_an_admin_can_generate_a_system_report",
+      "subtasks": [
+        "Build `client/src/components/admin/AdminSystemReportsPage.tsx` (the prototype page was an ungenerated placeholder) with the four sections named in `.codalio/ui-prototype/ui_structure.json`",
+        "Wire report generation to `useModelStore('system_reports')` and the health panel to `api.get('/system/health')`",
+        "Develop: system reports"
+      ],
+      "compensated_from_gap": "SITEMAP_PAGE_NO_AC"
+    },
+    {
+      "id": "AC-63",
+      "name": "Successful admin login redirects to /admin (the sitemap admin route), not /admin/dashboard.",
+      "user_story": "Gap compensation: Admin login redirect (FLOW_PATH_NOT_IN_SITEMAP)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-63/AC-64:_/me_resolves_the_signed-in_user's_roles_for_the_organization",
+      "subtasks": [
+        "In `client/src/components/auth/LoginPage.tsx`, after `result.success` and `setOrganization`, navigate to `/admin` when the user has the admin role",
+        "Add `server/test/integration/auth_test.rb` asserting the login response carries the admin role",
+        "Develop: admin -> /admin"
+      ],
+      "compensated_from_gap": "FLOW_PATH_NOT_IN_SITEMAP"
+    },
+    {
+      "id": "AC-64",
+      "name": "After login, an admin lands on /admin while a content team member lands on /.",
+      "user_story": "Gap compensation: Role-conditional redirect (FLOW_JOURNEY_MISMATCH)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "AuthApiTest#test_AC-64:_a_content_manager_resolves_the_content_manager_role",
+      "subtasks": [
+        "Branch the post-login `navigate()` in `client/src/components/auth/LoginPage.tsx` on `useUserRole().hasRole('admin')`",
+        "Develop: role-conditional redirect"
+      ],
+      "compensated_from_gap": "FLOW_JOURNEY_MISMATCH"
+    },
+    {
+      "id": "AC-65",
+      "name": "A content_manager, editor or contributor is redirected away from every /admin/* route, while admin is allowed.",
+      "user_story": "Gap compensation: /admin role gate (PROTECTED_ROUTE_NO_AUTH_AC)",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "client/src/test/adminSurfaces.test.tsx > RoleProtectedRoute — the /admin/* gate (AC-65) > AC-65: an admin reaches the /admin/* route (backend: RbacTest#test_AC-65:_only_admin_may_reach_the_/admin_resource_set)",
+      "subtasks": [
+        "Add a role guard in `client/src/routes/custom.jsx` (pathless layout route) that redirects when `useUserRole()` lacks `admin`",
+        "Add `server/test/integration/rbac_test.rb` asserting 403 for content_manager on each /admin resource",
+        "Develop: RoleProtectedRoute gates /admin/* to admin"
+      ],
+      "compensated_from_gap": "PROTECTED_ROUTE_NO_AUTH_AC"
+    },
+    {
+      "id": "AC-66",
+      "name": "A post exposes slug, category, tags, read_time_minutes, view_count, scheduled_at and a computed has_video flag in API responses.",
+      "user_story": "Gap compensation: Post fields (DATA_MODEL_UX_MISMATCH)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostTest#test_AC-66:_a_post_exposes_slug,_category,_tags,_read_time_minutes,_view_count_and_scheduled_at",
+      "subtasks": [
+        "Add `slug`, `category`, `tags`, `read_time_minutes`, `view_count`, `scheduled_at` to `server/.rhino/blueprints/posts.yaml`",
+        "Add a `rhino_computed_attributes` `has_video` in `server/app/models/post.rb`",
+        "Add `server/test/models/post_test.rb` asserting `has_video` is true when a video is attached",
+        "Develop: Post fields"
+      ],
+      "compensated_from_gap": "DATA_MODEL_UX_MISMATCH"
+    },
+    {
+      "id": "AC-67",
+      "name": "A video exposes media_type, format, file_size, resolution, bitrate, description, thumbnail_url, status and a computed duration display string, and may exist without a post.",
+      "user_story": "Gap compensation: Video fields (DATA_MODEL_UX_MISMATCH)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideoTest#test_AC-67:_a_video_exposes_media_type,_format,_file_size,_resolution,_bitrate_and_description",
+      "subtasks": [
+        "Add the media columns and make `post_id` nullable in `server/.rhino/blueprints/videos.yaml`",
+        "Add a `rhino_computed_attributes` `duration` (MM:SS) in `server/app/models/video.rb`",
+        "Add `server/test/models/video_test.rb` asserting a video with no post is valid",
+        "Develop: Video fields",
+        "Fixed rhino-rails 4.10.0 params_hash stripping the Rails-reserved format param: config/initializers/rhino_format_param_patch.rb restores body-supplied format for models with a format column; regression assertions added to test/integration/videos_api_test.rb"
+      ],
+      "compensated_from_gap": "DATA_MODEL_UX_MISMATCH"
+    },
+    {
+      "id": "AC-68",
+      "name": "Analytics aggregates (total impressions, unique readers, engagement rate, watch time, daily series, leaderboard) are served by a tenant-safe endpoint.",
+      "user_story": "Gap compensation: Analytics aggregate (DATA_MODEL_UX_MISMATCH)",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsApiTest#test_AC-38/AC-68:_the_summary_returns_the_dashboard_aggregate_keys",
+      "subtasks": [
+        "Add `visitor_id` to `server/.rhino/blueprints/analytics_data.yaml`",
+        "Add `server/app/controllers/api/analytics_controller.rb` using `Rhino.query(AnalyticsData)` / `Rhino.query(Post)`",
+        "Add `server/test/integration/analytics_test.rb` asserting the summary keys and cross-org isolation",
+        "Develop: analytics aggregate"
+      ],
+      "compensated_from_gap": "DATA_MODEL_UX_MISMATCH"
+    },
+    {
+      "id": "AC-69",
+      "name": "The users table stores first_name, last_name, approved and profile_completed.",
+      "user_story": "Gap compensation: User columns (DATA_MODEL_UX_MISMATCH)",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "UserTest#test_AC-69/AC-71:_the_users_table_stores_first_name,_last_name,_approved_and_profile_completed",
+      "subtasks": [
+        "Add `server/db/migrate/*_add_profile_fields_to_users.rb` adding the four columns",
+        "Add validations to `server/app/models/user.rb` and update `server/db/seeds.rb` to populate them",
+        "Develop: user columns"
+      ],
+      "compensated_from_gap": "DATA_MODEL_UX_MISMATCH"
+    },
+    {
+      "id": "AC-70",
+      "name": "The integrations admin surface is served at /admin/api-integrations (the sitemap/prototype route).",
+      "user_story": "Gap compensation: Integration route (FLOW_PATH_NOT_IN_SITEMAP)",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "client/src/test/adminSurfaces.test.tsx > AdminIntegrationsPage — the sitemap route (AC-70) > AC-70: the integrations surface renders at /admin/api-integrations",
+      "subtasks": [
+        "Register `<Route path=\"/admin/api-integrations\" element={<AdminIntegrationsPage />} />` in `client/src/routes/custom.jsx`",
+        "Add a nav link to `/admin/api-integrations` in `client/src/components/layout/AppLayout.tsx`",
+        "Develop: AdminIntegrationsPage served at /admin/api-integrations"
+      ],
+      "compensated_from_gap": "FLOW_PATH_NOT_IN_SITEMAP"
+    },
+    {
+      "id": "AC-71",
+      "name": "The users table is extended with first_name, last_name, approved and profile_completed via a migration.",
+      "user_story": "Extra: User schema extension",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "UserTest#test_AC-69/AC-71:_the_users_table_stores_first_name,_last_name,_approved_and_profile_completed",
+      "subtasks": [
+        "Add `server/db/migrate/*_add_profile_fields_to_users.rb`",
+        "Add `rhino_additional_hidden :api_token` and the new validations to `server/app/models/user.rb`",
+        "Develop: User schema extension"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-72",
+      "name": "A post exposes a computed has_video attribute derived from its videos association.",
+      "user_story": "Extra: Post#has_video",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostTest#test_AC-72:_has_video_is_true_when_the_post_has_an_associated_video",
+      "subtasks": [
+        "Add `rhino_computed_attributes` returning `{ 'has_video' => videos.exists? }` in `server/app/models/post.rb`",
+        "Develop: Post#has_video"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-73",
+      "name": "Publishing a post sets published_at, and scheduling requires scheduled_at.",
+      "user_story": "Extra: Post publish transition",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostTest#test_AC-73:_publishing_sets_published_at_when_blank",
+      "subtasks": [
+        "Add a `before_save` callback and a custom validation in `server/app/models/post.rb`",
+        "Add `server/test/models/post_test.rb` covering both transitions",
+        "Develop: publish transition"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-74",
+      "name": "A post slug is auto-generated from the title when blank and is unique per organization.",
+      "user_story": "Extra: Post slug auto-generation",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostTest#test_AC-74:_slug_is_auto-generated_from_the_title_when_blank",
+      "subtasks": [
+        "Add a `before_validation` callback in `server/app/models/post.rb`",
+        "Add `validates :slug, uniqueness: { scope: :organization_id }, allow_nil: true`",
+        "Develop: slug auto-generation"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-75",
+      "name": "A content_manager/editor may only update or destroy posts they authored; admin may act on any post in the organization.",
+      "user_story": "Extra: Post ownership check",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostPolicyTest#test_AC-75:_a_content_manager_may_not_update_another_author's_post",
+      "subtasks": [
+        "Add `update?`/`destroy?` overrides calling `super` in `server/app/policies/post_policy.rb`",
+        "Add `server/test/integration/posts_policy_test.rb` asserting 403 for a non-author editor",
+        "Develop: ownership check"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-76",
+      "name": "A video exposes a computed duration display string (MM:SS) derived from duration_seconds.",
+      "user_story": "Extra: Video#duration display",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "VideoTest#test_AC-76:_duration_is_a_MM:SS_display_string_derived_from_duration_seconds",
+      "subtasks": [
+        "Add `rhino_computed_attributes` returning `{ 'duration' => format('%02d:%02d', ...) }` in `server/app/models/video.rb`",
+        "Develop: Video#duration"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-77",
+      "name": "A tenant-safe analytics aggregate endpoint returns the dashboard summary for a date range and content type.",
+      "user_story": "Extra: Analytics aggregate endpoint",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsSummaryApiTest#test_AC-77:_the_aggregate_endpoint_respects_the_permission_gate_and_tenancy",
+      "subtasks": [
+        "Add `server/app/controllers/api/analytics_controller.rb` and the route in `server/config/routes.rb`",
+        "Gate on `AnalyticsDataPolicy.new(user, AnalyticsData).index?` and use `Rhino.query`",
+        "Develop: analytics aggregate endpoint"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-78",
+      "name": "A view event can be recorded with a visitor_id so unique readers can be counted.",
+      "user_story": "Extra: Analytics event recording",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AnalyticsDataTest#test_AC-78:_a_view_event_records_a_visitor_id_and_defaults_recorded_at",
+      "subtasks": [
+        "Add a default `recorded_at` and `event_type` presence validation in `server/app/models/analytics_data.rb`",
+        "Add `server/test/integration/analytics_data_test.rb` asserting a created event is returned",
+        "Develop: event recording"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-79",
+      "name": "An admin-only system health endpoint returns api_gateway, db_replica, video_storage and security_perimeter status.",
+      "user_story": "Extra: System health endpoint",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-49/AC-50/AC-51/AC-52/AC-79:_the_system_health_endpoint_returns_the_four_tiles",
+      "subtasks": [
+        "Add `server/app/controllers/api/system_controller.rb#health` and the route in `server/config/routes.rb`",
+        "Add `server/test/integration/system_test.rb` asserting 403 for content_manager",
+        "Develop: system health endpoint"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-80",
+      "name": "A daily backup job runs and an admin can trigger a restore from the most recent backup.",
+      "user_story": "Extra: Daily backup + restore",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-55/AC-80:_an_admin_can_trigger_a_restore_from_the_most_recent_backup",
+      "subtasks": [
+        "Add `server/app/jobs/backup_job.rb` and schedule it in `server/config/recurring.yml`",
+        "Add `POST /api/{organization}/system/restore` to `server/app/controllers/api/system_controller.rb`",
+        "Develop: backup + restore"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-81",
+      "name": "Role-based access control denies content_manager/editor/contributor every admin resource and logs the attempt.",
+      "user_story": "Extra: RBAC enforcement",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "VideoPolicyTest#test_AC-81:_a_content_manager_is_denied_every_admin-only_resource",
+      "subtasks": [
+        "Add per-model policies in `server/app/policies/*_policy.rb` calling `super` and checking `has_role?(user, 'admin')`",
+        "Add `server/test/integration/rbac_test.rb` covering each admin resource per role",
+        "Develop: RBAC enforcement"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-82",
+      "name": "A contributor can only index/show posts and videos; store/update/destroy are denied.",
+      "user_story": "Extra: Contributor read-only scope",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "PostPolicyTest#test_AC-82:_a_contributor_may_not_create,_update_or_destroy_posts",
+      "subtasks": [
+        "Set `actions: [index, show]` and empty `create_fields`/`update_fields` for contributor in `server/.rhino/blueprints/posts.yaml` and `videos.yaml`",
+        "Add `server/test/integration/posts_policy_test.rb` asserting 403 for contributor on POST /api/{org}/posts",
+        "Develop: contributor read-only"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-83",
+      "name": "Toggling an integration updates its connected status, and a webhook test ping updates its status.",
+      "user_story": "Extra: Integration status + webhook ping",
+      "phase": "Phase 2: Analytics & Integrations",
+      "status": "tested",
+      "test_name": "AdminApiTest#test_AC-83:_a_webhook_test_ping_updates_its_status",
+      "subtasks": [
+        "Add `server/app/controllers/api/webhooks_controller.rb#ping` and the route in `server/config/routes.rb`",
+        "Wire the platform Switch and Test Ping button in `client/src/components/admin/AdminIntegrationsPage.tsx`",
+        "Develop: integration status + ping"
+      ],
+      "is_extra": true
+    },
+    {
+      "id": "AC-84",
+      "name": "Seeds create a Role row for each of admin, content_manager, editor and contributor plus a UsersRole per demo user.",
+      "user_story": "Extra: Multi-role seeds",
+      "phase": "Phase 1: Minimum Viable Product (MVP)",
+      "status": "tested",
+      "test_name": "SeedsTest#test_AC-84:_each_demo_persona_holds_the_expected_membership",
+      "subtasks": [
+        "Add the four `Role.find_or_create_by!` calls and `UsersRole` rows to `server/db/seeds.rb`",
+        "Add `server/test/integration/seeds_test.rb` asserting `User.first.has_permission?('posts.index', org)` is true",
+        "Develop: multi-role seeds"
+      ],
+      "is_extra": true
+    }
+  ],
+  "updated_at": "2026-09-28T22:26:16.416975+00:00",
+  "compliance": {
+    "implemented": 84,
+    "partial": 0,
+    "missing": 0,
+    "total": 84,
+    "score": 100.0,
+    "gates": [
+      {
+        "name": "backend",
+        "status": "passed",
+        "artifact": ".codalio/backend-gate.json",
+        "failures": []
+      },
+      {
+        "name": "frontend",
+        "status": "passed",
+        "artifact": ".codalio/frontend-gate.json",
+        "failures": []
+      },
+      {
+        "name": "runtime",
+        "status": "passed",
+        "artifact": ".codalio/runtime-smoke.json",
+        "failures": []
+      }
+    ]
+  }
+}

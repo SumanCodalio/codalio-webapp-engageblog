@@ -1,0 +1,331 @@
+{
+  "updated_at": "2026-09-28T16:45:00Z",
+  "summary": {
+    "gap_count": 17,
+    "high": 7,
+    "medium": 8,
+    "low": 2,
+    "key_features": 7,
+    "user_stories": 13,
+    "sitemap_pages": 10,
+    "prototype_pages": 10
+  },
+  "role_registry": [
+    {
+      "id": "admin",
+      "name": "Admin",
+      "source": "prd:user_stories(as_a=admin), prd:user_flows(primary_role=admin), prototype:Login(persona 'System Admin'), prototype:AdminUsers(role matrix column 'Admin')",
+      "notes": "Privileged role. Full access to all features and data. Owns /admin/* route group."
+    },
+    {
+      "id": "content_manager",
+      "name": "Content Manager",
+      "source": "prd:user_personas(Sarah Chen, application role content_manager), prd:user_journeys(actor content_manager), prototype:Login(persona 'Content Manager'), prototype:AdminUsers(role matrix column 'Content Mgr')",
+      "notes": "Canonical id for the PRD's 'content_team_member' (used in user_stories.as_a and user_flows.primary_role). Owns the publishing route group."
+    },
+    {
+      "id": "editor",
+      "name": "Editor",
+      "source": "prototype:AdminUsers(role matrix column 'Editor'), prototype:AdminUsers(invite dialog option 'Editor')",
+      "notes": "Prototype-derived sub-tier of the content team. Same publishing surface as content_manager minus privileged capabilities (4K upload, API keys, security config)."
+    },
+    {
+      "id": "contributor",
+      "name": "Contributor",
+      "source": "prototype:AdminUsers(role matrix column 'Contributor'), prototype:AdminUsers(invite dialog option 'Contributor (Draft Only)')",
+      "notes": "Prototype-derived read/draft-only tier. Read-only on Post (index/show, no store) \u2014 satisfies the host-runtime read-only role contract."
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "key_feature": "Analytics Dashboard",
+      "flows": [
+        "View Analytics Dashboard"
+      ],
+      "journeys": [
+        "Weekly content performance review"
+      ],
+      "sitemap_paths": [
+        "/analytics"
+      ],
+      "stories": [
+        "View Content Performance Metrics",
+        "Filter Analytics Data"
+      ],
+      "rhino_models": [
+        "AnalyticsData",
+        "Post"
+      ],
+      "specialists": [
+        "data-model-specialist",
+        "rhino-rails/querying",
+        "rhino-rails/custom-controllers"
+      ],
+      "status": "covered"
+    },
+    {
+      "key_feature": "Video Content Support",
+      "flows": [
+        "Upload Video Content",
+        "Create and Publish Blog Post"
+      ],
+      "journeys": [
+        "Publish a new video series"
+      ],
+      "sitemap_paths": [
+        "/media-library",
+        "/create-post"
+      ],
+      "stories": [
+        "Upload Video Content",
+        "Embed Video in Post"
+      ],
+      "rhino_models": [
+        "Video",
+        "Post"
+      ],
+      "specialists": [
+        "data-model-specialist",
+        "rhino-rails/models"
+      ],
+      "status": "covered"
+    },
+    {
+      "key_feature": "Content Publishing Tools",
+      "flows": [
+        "Create and Publish Blog Post"
+      ],
+      "journeys": [
+        "Publish a new video series"
+      ],
+      "sitemap_paths": [
+        "/create-post",
+        "/"
+      ],
+      "stories": [
+        "Create and Publish Text Post",
+        "Edit Existing Post"
+      ],
+      "rhino_models": [
+        "Post",
+        "Video"
+      ],
+      "specialists": [
+        "data-model-specialist",
+        "rhino-rails/policies"
+      ],
+      "status": "covered"
+    },
+    {
+      "key_feature": "User Management",
+      "flows": [
+        "Manage Users",
+        "Login",
+        "Logout"
+      ],
+      "journeys": [],
+      "sitemap_paths": [
+        "/admin/users",
+        "/login"
+      ],
+      "stories": [
+        "Admin Login",
+        "Manage Content Team Members",
+        "User Logout"
+      ],
+      "rhino_models": [
+        "User",
+        "Role",
+        "UsersRole",
+        "RolePermission"
+      ],
+      "specialists": [
+        "rhino-rails/authentication",
+        "rhino-rails/invitations",
+        "rhino-rails/policies"
+      ],
+      "status": "covered"
+    },
+    {
+      "key_feature": "API Integrations",
+      "flows": [
+        "Manage API Integrations"
+      ],
+      "journeys": [],
+      "sitemap_paths": [
+        "/admin/api-integrations"
+      ],
+      "stories": [
+        "Connect to Marketing Tools"
+      ],
+      "rhino_models": [
+        "Integration",
+        "ApiToken",
+        "Webhook"
+      ],
+      "specialists": [
+        "data-model-specialist",
+        "rhino-rails/models"
+      ],
+      "status": "covered"
+    },
+    {
+      "key_feature": "Scalability & Security",
+      "flows": [
+        "Review System Settings"
+      ],
+      "journeys": [],
+      "sitemap_paths": [
+        "/admin/system-settings"
+      ],
+      "stories": [
+        "Data Backup and Restore",
+        "Role-Based Access Control"
+      ],
+      "rhino_models": [
+        "SystemSetting",
+        "RolePermission"
+      ],
+      "specialists": [
+        "rhino-rails/policies",
+        "rhino-rails/multi-tenancy"
+      ],
+      "status": "partial \u2014 no story covers the /admin/system-settings surface itself (see G3)"
+    },
+    {
+      "key_feature": "Monitoring & Reporting",
+      "flows": [
+        "Generate System Reports"
+      ],
+      "journeys": [],
+      "sitemap_paths": [
+        "/admin/system-reports"
+      ],
+      "stories": [
+        "System Health Monitoring"
+      ],
+      "rhino_models": [
+        "SystemReport"
+      ],
+      "specialists": [
+        "rhino-rails/custom-controllers"
+      ],
+      "status": "partial \u2014 story AC names /admin/monitoring, sitemap names /admin/system-reports (see G4)"
+    }
+  ],
+  "gaps": [
+    {
+      "code": "SITEMAP_PAGE_NO_AC",
+      "severity": "high",
+      "message": "Sitemap page '/' (Dashboard) has no user story with an acceptance criterion. The prototype Landing page is a rich content-overview dashboard (metrics, recent posts table, batch actions) but no PRD story defines its behaviour.",
+      "compensation_hint": "Add a Dashboard screen to the plan (route '/'), back it with Post + AnalyticsData aggregates, and add a compensated AC row (compensated_from_gap=SITEMAP_PAGE_NO_AC) asserting the dashboard renders reach metrics and the recent-posts list."
+    },
+    {
+      "code": "SITEMAP_PAGE_NO_AC",
+      "severity": "medium",
+      "message": "Sitemap page '/admin' (Admin Panel) has no user story with an acceptance criterion. The prototype Admin page is a module launcher + infrastructure health panel.",
+      "compensation_hint": "Add an Admin overview screen (route '/admin') and a compensated AC row asserting admin-only access and the module links."
+    },
+    {
+      "code": "SITEMAP_PAGE_NO_AC",
+      "severity": "medium",
+      "message": "Sitemap page '/admin/system-settings' has no user story with an acceptance criterion, yet the prototype implements organization identity, video encoding, and security/SSO settings forms.",
+      "compensation_hint": "Add a SystemSetting model + screen and a compensated AC row asserting an admin can read and update organization/encoding/security settings."
+    },
+    {
+      "code": "SITEMAP_PAGE_NO_AC",
+      "severity": "high",
+      "message": "Sitemap page '/admin/system-reports' has no matching AC: the 'System Health Monitoring' story AC3 names '/admin/monitoring', which is not in the sitemap. The prototype AdminSystemReports page is also an ungenerated placeholder.",
+      "compensation_hint": "Plan the /admin/system-reports screen (SystemReport model + custom health endpoint), reconcile the route name to the sitemap, and add a compensated AC row for the monitoring dashboard."
+    },
+    {
+      "code": "FLOW_PATH_NOT_IN_SITEMAP",
+      "severity": "high",
+      "message": "The 'Admin Login' story AC3 ('Successful login redirects admin to /admin/dashboard') references /admin/dashboard, which does not exist in the sitemap (sitemap has /admin).",
+      "compensation_hint": "Reconcile the admin post-login landing to the sitemap route '/admin' and add a compensated AC row asserting admin login redirects to /admin."
+    },
+    {
+      "code": "FLOW_JOURNEY_MISMATCH",
+      "severity": "medium",
+      "message": "The 'Login' user_flow says content_team_member lands on '/' after login, while the 'Admin Login' story says admin lands on /admin/dashboard. The two describe the same action with different destinations and no role-conditional rule is stated.",
+      "compensation_hint": "Plan role-conditional post-login redirect: admin -> /admin, content_manager/editor/contributor -> /. Document in the plan and cover with a compensated AC row."
+    },
+    {
+      "code": "VAGUE_STORY_ROLE",
+      "severity": "medium",
+      "message": "Three user stories use as_a='system' ('System Health Monitoring', 'Data Backup and Restore', 'Role-Based Access Control'). 'system' is not a user role and cannot be granted permissions or routed.",
+      "compensation_hint": "Re-attribute these stories to the admin role for the user-facing surfaces (monitoring dashboard, restore trigger, RBAC enforcement) and treat the automated parts (daily backup, alerting) as backend Extras. Normalize _roles.yaml to the role_registry."
+    },
+    {
+      "code": "VAGUE_STORY_ROLE",
+      "severity": "medium",
+      "message": "The PRD uses two names for the same role: 'content_manager' (persona/journeys) and 'content_team_member' (user_stories.as_a, user_flows.primary_role).",
+      "compensation_hint": "Canonicalize to 'content_manager' in _roles.yaml and document the content_team_member -> content_manager mapping in the plan."
+    },
+    {
+      "code": "PERSONA_NO_JOURNEY",
+      "severity": "low",
+      "message": "The admin persona (Alex Thorne / 'System Admin' in the prototype) has no user_journey, though admin stories and flows exist.",
+      "compensation_hint": "Add an admin journey note in the plan (login -> /admin -> manage users/integrations/settings/reports) and ensure the admin route group is fully routed in ui-handoff.json."
+    },
+    {
+      "code": "DATA_MODEL_UX_MISMATCH",
+      "severity": "high",
+      "message": "The Post model in the PRD schema has only organization_id, user_id, title, content, status, published_at. The prototype reads post.category, post.slug, post.tags, post.readTime, post.hasVideo, post.views, post.date \u2014 none of which exist in the schema.",
+      "compensation_hint": "Extend the Post blueprint with slug (string), category (string), tags (jsonb), read_time_minutes (integer), view_count (integer), scheduled_at (datetime); expose has_video as a computed attribute derived from the videos association. Emit the exact camelCase keys the JSX reads via a serializer/computed attributes."
+    },
+    {
+      "code": "DATA_MODEL_UX_MISMATCH",
+      "severity": "high",
+      "message": "The Video model in the PRD schema has title, url, duration only, and post_id is a required reference. The prototype media library reads asset.type, asset.format, asset.size, asset.resolution, asset.bitrate, asset.duration (as a display string) and lists assets that are NOT attached to any post.",
+      "compensation_hint": "Extend the Video blueprint with media_type, format, file_size, resolution, bitrate, description, thumbnail_url, status; make post_id nullable (media-library assets are standalone). Store duration_seconds (integer) and expose a computed 'duration' display string (MM:SS) to match the JSX."
+    },
+    {
+      "code": "DATA_MODEL_UX_MISMATCH",
+      "severity": "high",
+      "message": "AnalyticsData has only event_type, event_data, recorded_at. The prototype analytics dashboard reads total impressions, unique readers, engagement rate, watch time, per-day reader/video series, and a leaderboard with views/watchTime/completion/shares \u2014 none derivable from the current columns alone.",
+      "compensation_hint": "Add visitor_id (string) to AnalyticsData for unique-visitor counting, and plan a custom aggregate endpoint (GET /api/analytics/summary) that returns the exact keys the JSX reads (total_impressions, unique_readers, engagement_rate, watch_time_hours, daily_series, leaderboard)."
+    },
+    {
+      "code": "DATA_MODEL_UX_MISMATCH",
+      "severity": "high",
+      "message": "Three user-story ACs require User columns that the PRD schema does not list: 'The data model stores approved', 'profile completed', 'first name', 'last name'. The sample_data users table also carries approved, profile_completed, first_name, last_name, sign_in_count.",
+      "compensation_hint": "Add a migration extending the core users table with first_name, last_name, approved (boolean), profile_completed (boolean). Document as an Extra since User is provided_by rhino_project_core and cannot be expressed in a blueprint."
+    },
+    {
+      "code": "PROTECTED_ROUTE_NO_AUTH_AC",
+      "severity": "medium",
+      "message": "Sitemap routes /admin, /admin/system-settings and /admin/system-reports are admin-only surfaces but no acceptance criterion explicitly asserts the auth/role gate for them (only the generic RBAC story covers /admin routes).",
+      "compensation_hint": "Add auth/roles gating in ui-handoff.json for every /admin/* page and add a compensated AC row asserting a content_manager/editor/contributor is redirected away from /admin/* while admin is allowed."
+    },
+    {
+      "code": "PRD_PROTOTYPE_ROUTE_GAP",
+      "severity": "medium",
+      "message": "The prototype page AdminSystemReports is an ungenerated placeholder ('Page Not Generated') even though the PRD sitemap requires /admin/system-reports with health, reports and audit-log sections.",
+      "compensation_hint": "Plan a real /admin/system-reports screen (SystemReport model + custom health endpoint) in the user's design idiom; ui-integration scaffolds the missing sections. Add a compensated AC row."
+    },
+    {
+      "code": "FLOW_PATH_NOT_IN_SITEMAP",
+      "severity": "medium",
+      "message": "The 'Connect to Marketing Tools' story AC1 names '/admin/integrations' while the sitemap and prototype use '/admin/api-integrations'.",
+      "compensation_hint": "Use the sitemap/prototype route '/admin/api-integrations' as canonical and note the reconciliation in the plan."
+    },
+    {
+      "code": "DATA_MODEL_UX_MISMATCH",
+      "severity": "low",
+      "message": "Post.status enum vocabulary differs: PRD sample_data uses 'Published'/'Draft' (capitalized) while the prototype uses 'Published'/'Draft'/'Scheduled'.",
+      "compensation_hint": "Define the Post status enum as lowercase draft/published/scheduled and have the serializer emit the capitalized display label the JSX renders (ContentStatusBadge normalizes case, so either works \u2014 pick lowercase storage + display label)."
+    }
+  ],
+  "hints_for_planner": [
+    "Canonicalize roles to admin, content_manager, editor, contributor in _roles.yaml; map PRD 'content_team_member' -> content_manager and drop the non-user 'system' role (re-attribute its stories to admin + backend Extras).",
+    "Extend Post, Video and AnalyticsData blueprints with the prototype-read fields (category, slug, tags, read_time_minutes, view_count, has_video; media_type, format, file_size, resolution, bitrate, description, nullable post_id, duration display string; visitor_id) so the shipped JSX has real data to bind to.",
+    "Add a migration Extra for users.first_name/last_name/approved/profile_completed (User is core-provided, not blueprintable).",
+    "Add models for the prototype-only admin surfaces: Integration, ApiToken, Webhook, SystemSetting, SystemReport, RolePermission.",
+    "Plan a custom aggregate endpoint GET /api/analytics/summary and a health endpoint GET /api/system/health (non-CRUD, tenant-safe via Rhino.query).",
+    "Reconcile route names: /admin/dashboard -> /admin, /admin/integrations -> /admin/api-integrations, /admin/monitoring -> /admin/system-reports.",
+    "Add compensated AC rows for every high-severity gap: dashboard (/), admin overview (/admin), system settings, system reports, admin login redirect, and the /admin/* role gate.",
+    "Every /admin/* page must carry roles:['admin'] in ui-handoff.json; publishing pages carry roles:['content_manager','editor'] (contributor read-only).",
+    "Seed all four Role rows plus a UsersRole per demo user (Sarah Chen=content_manager, Alex Thorne=admin, plus an editor and a contributor) or useRoles()/policies deny everything."
+  ]
+}

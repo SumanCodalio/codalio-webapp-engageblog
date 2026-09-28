@@ -1,0 +1,62 @@
+model: RolePermission
+slug: role_permissions
+table: role_permissions
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: true
+  pagination: true
+  per_page: 50
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  capability:
+    type: string
+    nullable: false
+    filterable: true
+    sortable: true
+    searchable: true
+  description:
+    type: text
+    nullable: true
+  role_key:
+    type: string
+    nullable: false
+    filterable: true
+    sortable: true
+  enabled:
+    type: boolean
+    nullable: false
+    default: false
+    filterable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+
+permissions:
+  admin:
+    actions: [index, show, store, update, destroy]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: [index, show]
+    show_fields: [id, capability, description, role_key, enabled]
+    create_fields: []
+    update_fields: []
+  editor:
+    actions: [index, show]
+    show_fields: [id, capability, description, role_key, enabled]
+    create_fields: []
+    update_fields: []
+  contributor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []

@@ -1,0 +1,115 @@
+model: Video
+slug: videos
+table: videos
+
+options:
+  belongs_to_organization: true
+  soft_deletes: true
+  audit_trail: false
+  pagination: true
+  per_page: 25
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  user_id:
+    type: foreignId
+    foreign_model: User
+    nullable: false
+    index: true
+  post_id:
+    type: foreignId
+    foreign_model: Post
+    nullable: true
+    index: true
+  title:
+    type: string
+    nullable: false
+    filterable: true
+    sortable: true
+    searchable: true
+  description:
+    type: text
+    nullable: true
+    searchable: true
+  url:
+    type: string
+    nullable: false
+  media_type:
+    type: string
+    nullable: false
+    default: "video"
+    filterable: true
+    sortable: true
+  format:
+    type: string
+    nullable: true
+    filterable: true
+    sortable: true
+  file_size:
+    type: string
+    nullable: true
+  resolution:
+    type: string
+    nullable: true
+  bitrate:
+    type: string
+    nullable: true
+  thumbnail_url:
+    type: string
+    nullable: true
+  duration_seconds:
+    type: integer
+    nullable: true
+    sortable: true
+  status:
+    type: string
+    nullable: false
+    default: "ready"
+    filterable: true
+    sortable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+  - type: belongsTo
+    model: User
+  - type: belongsTo
+    model: Post
+
+permissions:
+  admin:
+    actions: [index, show, store, update, destroy, trashed, restore, forceDelete]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: [index, show, store, update, destroy, trashed, restore]
+    show_fields: "*"
+    create_fields: &video_writable
+      - title
+      - description
+      - url
+      - media_type
+      - format
+      - file_size
+      - resolution
+      - bitrate
+      - thumbnail_url
+      - duration_seconds
+      - status
+      - post_id
+    update_fields: *video_writable
+  editor:
+    actions: [index, show, store, update]
+    show_fields: "*"
+    create_fields: *video_writable
+    update_fields: *video_writable
+  contributor:
+    actions: [index, show]
+    show_fields: [id, title, description, url, media_type, format, file_size, resolution, duration_seconds, status, post_id, created_at, updated_at]
+    create_fields: []
+    update_fields: []

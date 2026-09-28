@@ -1,0 +1,64 @@
+model: SystemReport
+slug: system_reports
+table: system_reports
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: true
+  pagination: true
+  per_page: 25
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  report_type:
+    type: string
+    nullable: false
+    filterable: true
+    sortable: true
+  parameters:
+    type: json
+    nullable: true
+  status:
+    type: string
+    nullable: false
+    default: "pending"
+    filterable: true
+    sortable: true
+  generated_at:
+    type: datetime
+    nullable: true
+    sortable: true
+  summary:
+    type: json
+    nullable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+
+permissions:
+  admin:
+    actions: [index, show, store, update, destroy]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
+  editor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
+  contributor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-28T16:59:49+00:00",
+  "files": {
+    "analytics_data.yaml": {
+      "content_hash": "921da2e5fa96c1089121638070e5db9f351c706ffa62b0c895882a0c954a4229",
+      "generated_files": [
+        "app/models/analytics_data.rb",
+        "db/migrate/20260928165949_create_analytics_data.rb",
+        "spec/factories/analytics_data.rb",
+        "app/models/scopes/analytics_data_scope.rb",
+        "app/policies/analytics_data_policy.rb",
+        "spec/models/analytics_data_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    },
+    "api_tokens.yaml": {
+      "content_hash": "e2c1c819369f2b8e4bf00dc571d4da1dd2780ec1be551ab87077ca2fabeef124",
+      "generated_files": [
+        "app/models/api_token.rb",
+        "db/migrate/20260928165950_create_api_tokens.rb",
+        "spec/factories/api_tokens.rb",
+        "app/models/scopes/api_token_scope.rb",
+        "app/policies/api_token_policy.rb",
+        "spec/models/api_token_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    },
+    "integrations.yaml": {
+      "content_hash": "a3820941d5635b338050c0d5ad4248925b08115f402615c172d7cc39926a3fd5",
+      "generated_files": [
+        "app/models/integration.rb",
+        "db/migrate/20260928165951_create_integrations.rb",
+        "spec/factories/integrations.rb",
+        "app/models/scopes/integration_scope.rb",
+        "app/policies/integration_policy.rb",
+        "spec/models/integration_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    },
+    "role_permissions.yaml": {
+      "content_hash": "31a4a46181b5a7281a11d7df542993565921a016bd6f7b69610823d043330a49",
+      "generated_files": [
+        "app/models/role_permission.rb",
+        "db/migrate/20260928165952_create_role_permissions.rb",
+        "spec/factories/role_permissions.rb",
+        "app/models/scopes/role_permission_scope.rb",
+        "app/policies/role_permission_policy.rb",
+        "spec/models/role_permission_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    },
+    "system_reports.yaml": {
+      "content_hash": "63050fe7f18cf0c1f1245103794eee9b60ea7de026eae233f90a4136e5c05d4c",
+      "generated_files": [
+        "app/models/system_report.rb",
+        "db/migrate/20260928165953_create_system_reports.rb",
+        "spec/factories/system_reports.rb",
+        "app/models/scopes/system_report_scope.rb",
+        "app/policies/system_report_policy.rb",
+        "spec/models/system_report_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    },
+    "system_settings.yaml": {
+      "content_hash": "abf8c988ffbf5e14f1dd34c9c5eac7923ec0d73b1ce550c6c7fd47650a51ae22",
+      "generated_files": [
+        "app/models/system_setting.rb",
+        "db/migrate/20260928165954_create_system_settings.rb",
+        "spec/factories/system_settings.rb",
+        "app/models/scopes/system_setting_scope.rb",
+        "app/policies/system_setting_policy.rb",
+        "spec/models/system_setting_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    },
+    "webhooks.yaml": {
+      "content_hash": "1ecb7f73a51450d7d6d10667628969d7233c2716149234faa350e8b678e86ad7",
+      "generated_files": [
+        "app/models/webhook.rb",
+        "db/migrate/20260928165955_create_webhooks.rb",
+        "spec/factories/webhooks.rb",
+        "app/models/scopes/webhook_scope.rb",
+        "app/policies/webhook_policy.rb",
+        "spec/models/webhook_spec.rb"
+      ],
+      "generated_at": "2026-09-28T16:59:49+00:00"
+    }
+  }
+}

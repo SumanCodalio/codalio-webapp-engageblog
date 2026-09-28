@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Phase 0: Verify/create Rhino v4 workspace (server + client)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase 0: Multi-tenancy gate (organizations install + verify)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase A: Generate feature models from blueprints + migrations",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase B: Implement Extras (computed attrs, endpoints, jobs, policies, seeds)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase C: Verification gates (runtime, smoke, AC sweep, migrations)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase D: Write backend unit + integration tests",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Frontend: flat-route owner context + page scaffolds",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Contract recovery: publish client/src/rhino.d.ts build evidence",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Final: AC sweep, tests green, finish",
+    "notes": "",
+    "status": "done"
+  }
+]

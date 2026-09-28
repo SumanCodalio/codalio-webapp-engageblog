@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Phase 0: Verify/create Rhino v4 workspace (server + client)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase 0: Multi-tenancy gate (organizations install + verify)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Phase A: Generate feature models from blueprints + migrations",
+    "notes": "",
+    "status": "in_progress"
+  },
+  {
+    "title": "Phase B: Implement Extras (computed attrs, endpoints, jobs, policies, seeds)",
+    "notes": "",
+    "status": "todo"
+  },
+  {
+    "title": "Phase C: Verification gates (runtime, smoke, AC sweep, migrations)",
+    "notes": "",
+    "status": "todo"
+  },
+  {
+    "title": "Phase D: Write backend unit + integration tests",
+    "notes": "",
+    "status": "todo"
+  },
+  {
+    "title": "Frontend: flat-route owner context + page scaffolds",
+    "notes": "",
+    "status": "todo"
+  },
+  {
+    "title": "Final: AC sweep, tests green, finish",
+    "notes": "",
+    "status": "todo"
+  }
+]

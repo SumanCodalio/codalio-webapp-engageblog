@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Recon: read design root, ui-handoff, plan, existing client",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Install/align user's styling stack (Tailwind/CSS/deps)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Vendor design-root pages/components verbatim into client/src",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Wire each page's data (reads + action_contract mutations)",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Wire identity/auth slots + auth routes",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Register routes with user's router + catch-all",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Scaffold any missing required screens in design idiom",
+    "notes": "",
+    "status": "done"
+  },
+  {
+    "title": "Verify diff vs design root + build + runtime smoke",
+    "notes": "",
+    "status": "done"
+  }
+]

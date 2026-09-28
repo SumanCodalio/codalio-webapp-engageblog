@@ -1,0 +1,78 @@
+model: SystemSetting
+slug: system_settings
+table: system_settings
+
+options:
+  belongs_to_organization: true
+  soft_deletes: false
+  audit_trail: true
+  pagination: false
+
+columns:
+  organization_id:
+    type: foreignId
+    foreign_model: Organization
+    nullable: false
+    index: true
+  company_name:
+    type: string
+    nullable: true
+  custom_domain:
+    type: string
+    nullable: true
+  contact_email:
+    type: string
+    nullable: true
+  transcode_preset:
+    type: string
+    nullable: false
+    default: "1080p"
+  max_upload_size:
+    type: string
+    nullable: false
+    default: "1024mb"
+  auto_captions:
+    type: boolean
+    nullable: false
+    default: true
+  auto_chapters:
+    type: boolean
+    nullable: false
+    default: true
+  enforce_2fa:
+    type: boolean
+    nullable: false
+    default: true
+  session_timeout_minutes:
+    type: integer
+    nullable: false
+    default: 60
+  sso_provider:
+    type: string
+    nullable: true
+
+relationships:
+  - type: belongsTo
+    model: Organization
+
+permissions:
+  admin:
+    actions: [index, show, store, update]
+    show_fields: "*"
+    create_fields: "*"
+    update_fields: "*"
+  content_manager:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
+  editor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
+  contributor:
+    actions: []
+    show_fields: []
+    create_fields: []
+    update_fields: []
