@@ -6,7 +6,6 @@ export default defineConfig(async (env) => {
   const apiPort = process.env.API_PORT;
   if (!apiPort) throw new Error('API_PORT is required for Rhino v4 preview');
   const proxyConfig = { server: {
-    allowedHosts: ['.prod-runtime.all-hands.dev'],
     proxy: { '/api': {
     target: `http://127.0.0.1:${apiPort}`,
     changeOrigin: true,
