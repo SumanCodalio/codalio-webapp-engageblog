@@ -12,6 +12,8 @@
 /.codalio/ui-handoff.json
 /.codalio/.rhino-plan.md.prev
 /.codalio/paused-insufficient-credits
+/.codalio/audit
+/.env
 /log/*
 !/log/.keep
 /tmp/*
