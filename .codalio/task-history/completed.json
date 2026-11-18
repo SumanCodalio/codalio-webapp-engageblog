@@ -3,6 +3,5 @@
   "develop",
   "ui-integration",
   "test",
-  "review",
-  "audit"
+  "review"
 ]
