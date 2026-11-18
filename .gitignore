@@ -9,7 +9,11 @@
 /.codalio/source-repo.json
 /.codalio/prd-diff.json
 /.codalio/prd-change.json
+/.codalio/phase-scope.json
+/.codalio/trade-project.json
+/.codalio/auth-mode.json
 /.codalio/ui-handoff.json
+/.codalio/default-logins.json
 /.codalio/.rhino-plan.md.prev
 /.codalio/paused-insufficient-credits
 /.codalio/audit
@@ -22,3 +26,7 @@
 !/server/log/.keep
 /server/tmp/*
 !/server/tmp/.keep
+/coverage/*
+!/coverage/.keep
+/server/coverage/*
+!/server/coverage/.keep

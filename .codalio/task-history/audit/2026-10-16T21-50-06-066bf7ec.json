@@ -1,0 +1,22 @@
+[
+  {
+    "title": "1. Explore codebase and run automated metrics & tools",
+    "notes": "Rubocop, Brakeman, bundler-audit, rails test, tsc, vitest, and npm audit executed and recorded.",
+    "status": "done"
+  },
+  {
+    "title": "2. Perform engineering and security manual code review",
+    "notes": "Review backend (rails/rhino) models, controllers, policies, routes, schema and frontend (react) code for security, tenancy, permissions, data layer, quality.",
+    "status": "done"
+  },
+  {
+    "title": "3. Generate audit report files (.codalio/audit/report.md and report.json)",
+    "notes": "Compile scorecard, findings, engineering review scores, and write report.md and report.json under .codalio/audit/",
+    "status": "done"
+  },
+  {
+    "title": "4. Verify outputs and finish",
+    "notes": "Verify file formats, clean up any scratch files, and finalize task with finish tool.",
+    "status": "done"
+  }
+]
